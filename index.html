@@ -12,7 +12,31 @@
 <body>
 
     <div id="app">
-        
+        <section id="landing">
+            <div id="logoView"></div>
+            <button onclick="searchFunction()"></button>
+        </section>
+        <section id="searchForm">
+            <div id="currentLocation"><button onclick="getLocation()"></button></div>
+            <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
+            <div id="locationForm">
+                <form action="">
+                    Street Address<br>
+                    <input type="text" id="address">
+                    City<br>
+                    <input type="text" id="city">
+                    Postal Code<br>
+                    <input type="text" id="zip">
+                    <input type="submit" value="Use This Address">
+                </form>
+            </div>
+            <div class="bottomBanner"></div>
+        </section>
+        <section id="jobsView">
+            <div id="topBanner">Jobs Near Me</div>
+            <div id="searchBanner">
+            </div>
+        </section>
     </div>
     
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -1,7 +1,9 @@
 
 Vue.component('landing',{
     template:
-
+    `
+    
+    `
     
 
 })
