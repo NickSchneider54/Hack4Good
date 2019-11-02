@@ -132,3 +132,20 @@
     <script src="scripts.js"></script>
 </body>
 </html>
+
+<section id="eventDetails">
+    <div class="title">Event Details</div>
+    <div id="eventTitle"></div>
+    <div id="eventDescription"></div>
+    <div id="actionButtons">
+        <div id="addCalander"><button onclick="addCalander()">Add To Calander</button></div>
+        <div id="moreDetails"><button onclick="linkToEventInfo()">More</button></div>
+    </div>
+    <div id="map"><button onclick="openMap()">Map</button></div>
+    <div id="address"></div>
+    <div id="eventInfo">
+        <div id="date"></div>
+        <div id="time"></div>
+        <div id="cost"></div>
+    </div>
+</section>
