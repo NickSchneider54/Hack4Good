@@ -233,7 +233,7 @@ var app = new Vue({
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-        'jobsPage' : jobsPage,
+
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
         'eventsPage' : eventsPage,
@@ -302,8 +302,8 @@ var app = new Vue({
         if(localStorage.lat){
             this.lat = localStorage.lat;
         }
-        if(localStorage.lat){
-            this.long = localStorage.long;
+        if(localStorage.lng){
+            this.lng = localStorage.lng;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
                        
@@ -351,21 +351,18 @@ function getDistance(origin, destinationsLat, destinationsLong)
   }
 
 
-getDistance(getLocation(), -93.2916513, 37.1436541);
+// getDistance(getLocation(), -93.2916513, 37.1436541);
 
 
 function getLocation(){         
-    var location = navigator.geolocation.getCurrentPosition(locationFound);
-    var lat = location.position.coords.latitude;
-    var lng = location.position.coords.longitude;
-    var userLocation = [lat, lng];
-    return userLocation;
+    navigator.geolocation.getCurrentPosition(locationFound);
 }
 
 function locationFound(position){
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    convertLatLng(lat, lng);
+    app.lat = position.coords.latitude;
+    app.lng = position.coords.longitude;
+    convertLatLng(app.lat, app.lng);
+    console.log(lat, lng);
 }
 
 function convertLatLng(lat, lng){
@@ -380,7 +377,7 @@ function convertLatLng(lat, lng){
                 alert("Could not find your current location");
             }
         }
-        app.component('jobsPage');
+        
     });            
 }
 
