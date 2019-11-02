@@ -1,3 +1,6 @@
+window.addEventListener("load", function(){
+    document.getElementById('app').innerHTML = Vue.landing;
+});
 
 Vue.component('landing', {
     template:
