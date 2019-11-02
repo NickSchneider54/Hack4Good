@@ -13,17 +13,6 @@
 <body>
 
     <div id="app">
-        <div id ="jobs" v-show="false"> 
-            
-            <h2 class="display-4">Jobs Near You</h2>
-                <jobspage 
-                v-for="currentJob in currentJobs.slice(0, 10)"
-                v-bind:currentjob="currentJob"
-                v-bind:key="currentJob.id"
-                
-                ></jobspage>
-            
-        </div>
             
         <div :is="currentComponent" :component="component"></div>   
         <nav class="navbar fixed-bottom bg-primary">

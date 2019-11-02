@@ -19,6 +19,8 @@ var landingPage = {
     props:['component']
 }
 
+
+
 var locationPage = {
     template:
     `
@@ -48,24 +50,15 @@ var locationPage = {
     props:['component']
 }
 
-Vue.component('jobspage', {
+var jobsPage = {
     props: ['currentjob'],
     template: 
     `
-    <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header">{{ currentjob.title}} </div>
-                <div class="card-body text-dark">
-                  <p class="card-text">{{ currentjob.employer.name }} </p>
-                </div>
-            
-              
-                </div>
-        </section> 
-
+        <h2 class="define-4">Jobs Near You</h2>
+        
+      
     `
-})
-
+}
 
 var alertsPage = {
     template:
@@ -247,7 +240,7 @@ var app = new Vue({
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-
+        'jobsPage' : jobsPage,
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
         'eventsPage' : eventsPage,
@@ -303,7 +296,25 @@ var app = new Vue({
        setLocation: function(frmLocation){
             this.location = frmLocation;
             console.log(this.location);
-       }
+       },
+       population: function(aryOfJobs) {
+        var jobCards = ""
+        for (var i = 0; i < 10; i++) {
+            jobCards += `
+                <section id="jobsPage">
+                    <div class="card border-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">${ [i] } </div>
+                        <div class="card-body text-dark">
+                        <p class="card-text">${ [i]}</p>
+                            getDistance(.lat, this.lat, currentjob.locations)</p>
+                        </div>
+                    </div>
+                </section>
+            `
+        }
+        console.log(aryOfJobs)
+        return jobCards;
+    }
        
     },
     mounted(){
@@ -320,9 +331,7 @@ var app = new Vue({
             this.lng = localStorage.lng;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-                       
             this.currentJobs = response.data.data
-       
         })
     },
     watch:{
@@ -339,7 +348,7 @@ var app = new Vue({
     }
 });
 
-function getDistance(origin, destinationsLat, destinationsLong)
+function getDistance(originLat, originLong, destinationsLat, destinationsLong)
   {
       
      //Find the distance
@@ -376,7 +385,6 @@ function locationFound(position){
     app.lat = position.coords.latitude;
     app.lng = position.coords.longitude;
     convertLatLng(app.lat, app.lng);
-    console.log(lat, lng);
 }
 
 function convertLatLng(lat, lng){
@@ -395,7 +403,6 @@ function convertLatLng(lat, lng){
     });            
 }
 
+app.component('jobsPage')
 
-
-
-
+console.log(localStorage.getItem("lat"))
