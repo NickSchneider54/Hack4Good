@@ -9,3 +9,23 @@ ul{
 .nav-link{
     display: inline-block !important;
 }
+
+#logoView {
+    height: 75%;
+    width: 100%;
+}
+
+#logoView > img {
+    height: 100%;
+    width: 100%;
+    padding-bottom: 50%;
+}
+
+#landing-btn {
+    margin: auto;
+}
+
+#landingPage > #landing-btn{
+    width: 75%;
+    height: 150%;
+}
