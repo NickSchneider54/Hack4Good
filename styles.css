@@ -2,12 +2,10 @@
     color: red;
 }
 
-.navbar .form-inline{
-    background-color:#4979ad;
-}
-
-.nav-link{
+.navbar .btn{
     display: inline-block !important;
+    color: white;
+    margin: 3px;
 }
 
 #logoView {
