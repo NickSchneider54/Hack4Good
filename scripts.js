@@ -219,8 +219,14 @@ var app = new Vue({
         'landingPage' : landingPage,
         'locationPage' : locationPage,
         'jobsPage' : jobsPage,
-        'favoriteJobs' : favoriteJobs
-    },    
+        'alertsPage' : alertsPage,
+        'favoritesPage' : favoritesPage,
+        'events' : events,
+        'jobSearchSettings' : jobSearchSettings,
+        'jobDetails' : jobDetails,
+        'placeholder' : placeholder,
+        'eventDetails' : eventDetails
+    },
     methods:{
        component: function(component){
            this.currentComponent = component;
