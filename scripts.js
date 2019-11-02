@@ -44,29 +44,6 @@ var locationPage = {
     props:['component']
 }
 
-var jobsPage = {
-    props: ['currentjob'],
-    template: 
-    `
-<<<<<<< HEAD
-        <section id="jobsPage">
-            
-            <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header">{{ currentjob.title}} </div>
-                <div class="card-body text-dark">
-                    <p class="card-text">{{ currentjob.employer.name }} </p>
-                </div>       
-            </div>
-        </section> 
-
-=======
-        <h2 class="define-4">Jobs Near You</h2>
-        
-      
->>>>>>> master
-    `
-}
-
 var alertsPage = {
     template:
     `
@@ -251,7 +228,6 @@ var app = new Vue({
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-        'jobsPage' : jobsPage,
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
         'eventsPage' : eventsPage,
@@ -307,9 +283,9 @@ var app = new Vue({
        setLocation: function(frmLocation){
             this.location = frmLocation;
             console.log(this.location);
-<<<<<<< HEAD
+
        }       
-=======
+
        },
        population: function(aryOfJobs) {
         var jobCards = ""
@@ -328,9 +304,6 @@ var app = new Vue({
         }
         console.log(aryOfJobs)
         return jobCards;
-    }
-       
->>>>>>> master
     },
     mounted(){
         var newLocation;
