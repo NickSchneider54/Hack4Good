@@ -13,6 +13,12 @@
 <body>
 
     <div id="app">
+            <jobspage 
+            v-for="currentJob in currentJobs"
+            v-bind:currentjob="currentJob"
+            v-bind:key="currentJob.id"
+            >
+                    </jobspage> 
         <div :is="currentComponent" :component="component"></div>   
         <nav class="navbar fixed-bottom bg-primary">
             <form class="form-inline m-auto">

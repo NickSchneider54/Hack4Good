@@ -61,16 +61,17 @@ Vue.component('jobspage', {
     `
 })
 
+/* <jobspage 
+        v-for="currentJob in currentJobs"
+        v-bind:currentjob="currentJob"
+        v-bind:key="currentJob.id"
+        >
+                </jobspage> */
 
 
 var jobsPage = {
     template: 
     `
-    <jobspage 
-        v-for="currentJob in currentJobs"
-        v-bind:key="currentJob.id"
-        v-bind:currentjob="currentJob"
-        >
         <section id="jobsPage">
             <div id="topBanner">Jobs Near Me</div>
                 <div id="searchBanner">
@@ -83,7 +84,7 @@ var jobsPage = {
               
                 </div>
         </section> 
-        </jobspage>
+
         
     `,
     props:['component']
