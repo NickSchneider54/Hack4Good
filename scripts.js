@@ -144,6 +144,7 @@ var settings = {
                     <input type="checkbox" class="custom-control-input" id="customSwitch4">                    
                 </div>
             </div>
+            <input @click="component('locationPage')" class="btn" type="button" value="location">
         </section>
     `,
     props:['component']
