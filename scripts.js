@@ -28,7 +28,7 @@ var locationPage = {
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 
-                <form action="component(jobsPage)">
+                <form action="component(jobspage)">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -223,6 +223,8 @@ var app = new Vue({
     el: "#app",
     data: {
         location: "",
+        lat: "",
+        lng: "",
         favorites: [],
         currentJobs: [],
         trvlConstraints: [],
@@ -291,19 +293,21 @@ var app = new Vue({
        
     },
     mounted(){
-        var aryTravelInfo = [];
         var newLocation;
+        var newLat;
+        var newLng;
         if(localStorage.location){
             this.location = localStorage.location;
+        }
+        if(localStorage.lat){
+            this.lat = localStorage.lat;
+        }
+        if(localStorage.lat){
+            this.long = localStorage.long;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
                        
             this.currentJobs = response.data.data
-
-            for(var i = 0; i < 10; i++){
-                aryTravelInfo.push(getTravelInfo(this.currentJobs[i]));
-                this.currentJobs[i].locations.data.push(aryTravelInfo[i]);
-            }
        
         })
     },
@@ -311,23 +315,16 @@ var app = new Vue({
         location(newLocation){
             localStorage.location = newLocation;
             
+        },
+        lat(newLat){
+            localStorage.lat = newLat;
+        },
+        lng(newLng){
+            localStorage.lng = newLng;
         }
     }
 });
 
-function getTravelInfo(element){ 
-    var aryTravelTime = [];      
-    $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&travel_mode=driving|walking|transit&origins=localStorage.location.data&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
-        result.data.forEach((trvlInfo, index) =>{
-            aryTravelTime.push(trvlInfo);
-        });
-        console.log(aryTravelTime);
-        return aryTravelTime;
-    }});
-        
-}
-
-<<<<<<< Updated upstream
 function getDistance(origin, destinationsLat, destinationsLong)
   {
       
@@ -353,16 +350,9 @@ function getDistance(origin, destinationsLat, destinationsLong)
     });
   }
 
-<<<<<<< HEAD
-getDistance(getLocation(), 37.1436541, -93.2916513);
-=======
-function getLocation(){         
-    navigator.geolocation.getCurrentPosition(locationFound);
-}
->>>>>>> Stashed changes
-=======
-getDistance(getLocation, -93.2916513, 37.1436541);
->>>>>>> master
+
+getDistance(getLocation(), -93.2916513, 37.1436541);
+
 
 function getLocation(){         
     var location = navigator.geolocation.getCurrentPosition(locationFound);
