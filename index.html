@@ -15,10 +15,10 @@
         <div :is="currentComponent" :component="component"></div>   
         <nav class=" nav fixed-bottom">
             <ul class="nav nav-bar">
-                <li @click="component('mapPage')" class="nav-item"><button>Map</button></li>
-                <li @click="component('alertsPage')" class="nav-item"><button>Alerts</button></li>
-                <li @click="component('favoritesPage')" class="nav-item"><button>Favorites</button></li>
-                <li @click="component('eventsPage')" class="nav-item"><button>Events</button></li>
+                <li @click="component('mapPage')" class="nav-item"><button class="btn btn-primary">Map</button></li>
+                <li @click="component('alertsPage')" class="nav-item"><button class="btn btn-primary">Alerts</button></li>
+                <li @click="component('favoritesPage')" class="nav-item"><button class="btn btn-primary">Favorites</button></li>
+                <li @click="component('eventsPage')" class="nav-item"><button class="btn btn-primary">Events</button></li>
             </ul>
         </nav>
     </div>

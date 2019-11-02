@@ -13,7 +13,7 @@ var landingPage = {
     `
         <section id="landingPage">
             <div id="logoView"></div>
-            <button @click="component('locationPage')" type="submit">Search Jobs</button>
+            <button @click="component('locationPage')" type="submit" class="btn btn-primary">Search Jobs</button>
         </section>
     `,
     props:['component']
@@ -23,7 +23,7 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
-            <div id="currentLocation"><button onclick="getLocation()">Use Current Location</button></div>
+            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 <form action="component(jobsPage)">
@@ -63,8 +63,8 @@ var alertsPage = {
         <section id="alerts">
             <div class="title">Alerts</div>
             <section id="alertTabs">
-                <div id="jobsTab"><button onclick="showJobAlerts()">Jobs</button></div>
-                <div id="eventsTab"><button onclick="showEventAlerts()">Events</button></div>
+                <div id="jobsTab"><button onclick="showJobAlerts()" class="btn btn-primary">Jobs</button></div>
+                <div id="eventsTab"><button onclick="showEventAlerts()" class="btn btn-primary">Events</button></div>
                 <div id="jobListingAlerts">
                     <div id="jobListingAlert"></div>
                 </div>
@@ -145,9 +145,9 @@ var jobDetails = {
             <div class="title">Job Details</div>
             <div id="jobTitle"></div>
             <div id="jobDescription"></div>
-            <button onclick="callSiteForMore()">More</button>
+            <button onclick="callSiteForMore()" class="btn btn-primary">More</button>
             <div id="mapBar">
-                <div id="openMap"><button onclick="openMap()">Map</button></div>
+                <div id="openMap"><button onclick="openMap()" class="btn btn-primary">Map</button></div>
                 <div id="address"></div>
             </div>
             <div id="jobInfo">
@@ -170,10 +170,10 @@ var mapPage = {
             </div>
             <!-- Add Map -->
             <div id="transportationTypes">
-                <button onclick="showMapWalk()">Walk</button>
-                <button onclick="showMapBike()">Bike</button>
-                <button onclick="showMapBus()">Bus</button>
-                <button onclick="showMapCar()">Car</button>
+                <button onclick="showMapWalk()" class="btn btn-primary">Walk</button>
+                <button onclick="showMapBike()" class="btn btn-primary">Bike</button>
+                <button onclick="showMapBus()" class="btn btn-primary>Bus</button>
+                <button onclick="showMapCar()" class="btn btn-primary">Car</button>
             </div>
             <div id="address"></div>
             <div id="transportInfo">
@@ -194,10 +194,10 @@ var eventDetails = {
             <div id="eventTitle"></div>
             <div id="eventDescription"></div>
             <div id="actionButtons">
-                <div id="addCalander"><button onclick="addCalander()">Add To Calander</button></div>
-                <div id="moreDetails"><button onclick="linkToEventInfo()">More</button></div>
+                <div id="addCalander"><button onclick="addCalander()" class="btn btn-primary">Add To Calander</button></div>
+                <div id="moreDetails"><button onclick="linkToEventInfo()" class="btn btn-primary">More</button></div>
             </div>
-            <div id="map"><button onclick="openMap()">Map</button></div>
+            <div id="map"><button onclick="openMap()" class="btn btn-primary">Map</button></div>
             <div id="address"></div>
             <div id="eventInfo">
                 <div id="date"></div>
