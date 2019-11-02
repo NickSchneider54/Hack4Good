@@ -56,22 +56,17 @@ Vue.component('jobspage', {
     props: ['currentjob'],
     template: 
     `
+    <section id="jobsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{ currentjob.title}} </div>
+                <div class="card-body text-dark">
+                  <p class="card-text">{{ currentjob.employer.name }} </p>
+                </div>
+            
+              
+                </div>
+        </section> 
 
-    <section id="jobDetails">
-    <div class="title">Job Details</div>
-    <div id="jobTitle">{{ currentjob.title }}</div>
-    <div id="jobDescription">{{ currentjob.description }}</div>
-    <button onclick="callSiteForMore()" class="btn btn-primary">More</button>
-    <div id="mapBar">
-        <div id="openMap"><button onclick="openMap()" class="btn btn-primary">Map</button></div>
-        <div id="address"></div>
-    </div>
-    <div id="jobInfo">
-        <div id="pay">10.00/hr</div>
-        <div id="hourType">Part-Time</div>
-        <div id="jobRequirements">High School</div>
-    </div>
-</section>
     `
 })
 
@@ -87,16 +82,12 @@ var jobsPage = {
     template: 
     `
         <section id="jobsPage">
-            <div id="topBanner">Jobs Near Me</div>
-                <div id="searchBanner">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header"></div>
                 <div class="card-body text-dark">
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
-              </div>
-              
-                </div>
+            </div>
         </section> 
 
         
@@ -264,7 +255,6 @@ var app = new Vue({
         currentJobs: [],
         trvlConstraints: [],
         currentComponent: 'landingPage',
-        searchJobs: false
         },
     components:{
         'landingPage' : landingPage,
@@ -319,8 +309,8 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                this.component('jobspage');
-                this.searchJobs = true;
+                //this.component('jobsPage');
+                
             }          
        },
        setLocation: function(frmLocation){
@@ -348,6 +338,7 @@ var app = new Vue({
     watch:{
         location(newLocation){
             localStorage.location = newLocation;
+            
         }
     }
 });
