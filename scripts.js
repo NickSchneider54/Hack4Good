@@ -27,8 +27,7 @@ var locationPage = {
             <div id="currentLocation"><button @click="component('jobsPage')">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
-<<<<<<< Updated upstream
-                <form action="#" onsubmit="app.formValidation(this.form); return false">
+                <form action="#">
                     <div id="alertAddress"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -38,17 +37,7 @@ var locationPage = {
                     <div id="alertZip"></div>
                     Postal Code<br>
                     <input type="text" id="zip" name="zip">
-                    <button type="submit">Use This Address</button>
-=======
-                <form action="">
-                    Street Address
-                    <input type="text" name="address" id="address">
-                    City
-                    <input type="text" name="city" id="city">
-                    Postal Code
-                    <input type="text" name="zip" id="zip">
-                    <button @click="formValidation(this)">Use This Address</button>
->>>>>>> Stashed changes
+                    <input onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="submit" value="Use This Address">
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -248,7 +237,21 @@ var app = new Vue({
            this.currentComponent = component;
        },
        formValidation: function(frm){
-        
+            var isValid = true;
+            if(frm.address.value == ""){
+                isValid = false;
+                document.getElementById('alertAddress').innerHTML = "required fields are missing";                       
+            }  
+            if(frm.city.value == ""){
+                isValid = false;
+                document.getElementById('alertCity').innerHTML = "required fields are missing";
+            }  
+            if(frm.zip.value == ""){
+                isValid = false;
+                document.getElementById('alertZip').innerHTML = "required fields are missing";                 
+            } 
+            this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
+            return isValid;        
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
