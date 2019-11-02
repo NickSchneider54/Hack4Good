@@ -1,7 +1,3 @@
-//window.addEventListener("load", getJobs);
-
-//var aryCurrentJobs = getJobs();
-
 
 function job(title, company, description, location){
     this.title = title,
@@ -32,7 +28,7 @@ var locationPage = {
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 
-                <form action="component(jobsPage)">
+                <form action="component(jobspage)">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -70,30 +66,6 @@ Vue.component('jobspage', {
     `
 })
 
-/* <jobspage 
-        v-for="currentJob in currentJobs"
-        v-bind:currentjob="currentJob"
-        v-bind:key="currentJob.id"
-        >
-                </jobspage> */
-
-
-var jobsPage = {
-    template: 
-    `
-        <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header"></div>
-                <div class="card-body text-dark">
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </section> 
-
-        
-    `,
-    props:['component']
-}
 
 var alertsPage = {
     template:
@@ -251,6 +223,8 @@ var app = new Vue({
     el: "#app",
     data: {
         location: "",
+        lat: "",
+        lng: "",
         favorites: [],
         currentJobs: [],
         trvlConstraints: [],
@@ -309,8 +283,7 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                //this.component('jobsPage');
-                
+                                
             }          
        },
        setLocation: function(frmLocation){
@@ -320,19 +293,21 @@ var app = new Vue({
        
     },
     mounted(){
-        var aryTravelInfo = [];
         var newLocation;
+        var newLat;
+        var newLng;
         if(localStorage.location){
             this.location = localStorage.location;
+        }
+        if(localStorage.lat){
+            this.lat = localStorage.lat;
+        }
+        if(localStorage.lat){
+            this.long = localStorage.long;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
                        
             this.currentJobs = response.data.data
-
-            for(var i = 0; i < 10; i++){
-                aryTravelInfo.push(getTravelInfo(this.currentJobs[i]));
-                this.currentJobs[i].locations.data.push(aryTravelInfo[i]);
-            }
        
         })
     },
@@ -340,35 +315,15 @@ var app = new Vue({
         location(newLocation){
             localStorage.location = newLocation;
             
+        },
+        lat(newLat){
+            localStorage.lat = newLat;
+        },
+        lng(newLng){
+            localStorage.lng = newLng;
         }
     }
 });
-
-//get JOBS
-
-// function getJobs() {
-//     var aryJobs = [];
-//     var aryTravelInfo = [];
-//     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
-//         result.data.forEach((element) => {
-                     
-//         });
-        
-//     }});    
-//     return aryJobs;    
-// }
-
-function getTravelInfo(element){ 
-    var aryTravelTime = [];      
-    $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&travel_mode=driving|walking|transit&origins=localStorage.location.data&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
-        result.data.forEach((trvlInfo, index) =>{
-            aryTravelTime.push(trvlInfo);
-        });
-        console.log(aryTravelTime);
-        return aryTravelTime;
-    }});
-        
-}
 
 function getDistance(origin, destinationsLat, destinationsLong)
   {
@@ -395,7 +350,9 @@ function getDistance(origin, destinationsLat, destinationsLong)
     });
   }
 
-getDistance(getLocation, -93.2916513, 37.1436541);
+
+getDistance(getLocation(), -93.2916513, 37.1436541);
+
 
 function getLocation(){         
     var location = navigator.geolocation.getCurrentPosition(locationFound);
