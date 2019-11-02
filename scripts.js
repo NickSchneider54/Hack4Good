@@ -56,9 +56,22 @@ Vue.component('jobspage', {
     props: ['currentjob'],
     template: 
     `
-    <div class="jobspage">
-    <p>{{ currentjob.title }}</p>
+
+    <section id="jobDetails">
+    <div class="title">Job Details</div>
+    <div id="jobTitle">{{ currentjob.title }}</div>
+    <div id="jobDescription">{{ currentjob.description }}</div>
+    <button onclick="callSiteForMore()" class="btn btn-primary">More</button>
+    <div id="mapBar">
+        <div id="openMap"><button onclick="openMap()" class="btn btn-primary">Map</button></div>
+        <div id="address"></div>
     </div>
+    <div id="jobInfo">
+        <div id="pay">10.00/hr</div>
+        <div id="hourType">Part-Time</div>
+        <div id="jobRequirements">High School</div>
+    </div>
+</section>
     `
 })
 
@@ -251,6 +264,7 @@ var app = new Vue({
         currentJobs: [],
         trvlConstraints: [],
         currentComponent: 'landingPage',
+        searchJobs: false
         },
     components:{
         'landingPage' : landingPage,
@@ -305,7 +319,8 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                this.component('jobsPage');
+                this.component('jobspage');
+                this.searchJobs = true;
             }          
        },
        setLocation: function(frmLocation){
