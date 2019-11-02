@@ -23,7 +23,7 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
-            <div id="currentLocation"><button @click="component('jobsPage')">Use Current Location</button></div>
+            <div id="currentLocation"><button onclick="getLocation()">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 <form action="component(jobsPage)">
@@ -90,10 +90,10 @@ var favoritesPage = {
     props:['component']
 }
 
-var events = {
+var eventsPage = {
     template:
     `
-        <section id="events">
+        <section id="eventsPage">
             <div class="title">Events</div>
             <div id="eventListings">
                 <div id="eventLisitng"></div>
@@ -224,7 +224,7 @@ var app = new Vue({
         'jobsPage' : jobsPage,
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
-        'events' : events,
+        'eventsPage' : eventsPage,
         'settings' : settings,
         'jobDetails' : jobDetails,
         'mapPage' : mapPage,
@@ -247,7 +247,7 @@ var app = new Vue({
                 isValid = false;                 
             } 
             else if(regexAddress.test(frm.address.value) != true){
-                alertAddress.innerHTML = "invalid address"
+                alertAddress.innerHTML = "invalid address";
                 isValid = false;  
             } 
             if(frm.city.value == ""){                
@@ -255,7 +255,7 @@ var app = new Vue({
                 isValid = false;
             }
             else if(regexCity.test(frm.city.value)){
-                alertCity.innerHTML = "invalid city name"
+                alertCity.innerHTML = "invalid city name";
             }
             if(frm.zip.value == ""){                
                 alertZip.innerHTML = "required fields are missing";   
@@ -276,7 +276,8 @@ var app = new Vue({
        setLocation: function(frmLocation){
             this.location = frmLocation;
             console.log(this.location);
-       },
+       }
+       
     },
     mounted(){
         if(localStorage.location = newLocation){
@@ -300,6 +301,37 @@ function getJobs() {
     }});
 
     return array;
+}
+
+function calculateTravel(){
+    $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&transit_mode={{transit}}&origins={{app.location}}&destinations={{currentJob[i].location}}&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
+        result.data.foreach
+    }});
+}
+
+function getLocation(){         
+    navigator.geolocation.getCurrentPosition(locationFound);
+}
+
+function locationFound(position){
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    convertLatLng(lat, lng);
+}
+
+function convertLatLng(lat, lng){
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat,lng);
+    geocoder.geocode({'location' : latlng}, function(results, status){
+        if(status == google.maps.GeocoderStatus.OK){
+            if(results[1]){
+                app.location = results[0].formatted_address;
+            }
+            else{
+                alert("Could not find your current location");
+            }
+        }
+    });            
 }
 
 
