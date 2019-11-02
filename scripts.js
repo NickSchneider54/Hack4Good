@@ -212,7 +212,7 @@ var app = new Vue({
     data: {
         location: "",
         favorites: [],
-        currentJobs: [],
+        currentJobs: getJobs(),
         currentComponent: 'landingPage'
     },
     components:{
@@ -230,11 +230,15 @@ var app = new Vue({
 
 //get JOBS
 function getJobs() {
+    var array = new Array();
     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
-        
+        result.data.forEach((element, index) => {
+            array.push(element);
+        });
     }});
-}
 
+    return array;
+}
 
 
 
