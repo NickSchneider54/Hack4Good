@@ -34,7 +34,7 @@ var locationPage = {
                     <input type="text" id="city">
                     Postal Code<br>
                     <input type="text" id="zip">
-                    <button @click="component('jobsPage')" type="submit">Use This Address</button>
+                    <button @click="" type="submit">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -231,7 +231,7 @@ var app = new Vue({
             this.location = localstorage.location;
         }
     },
-    watch(){
+    watch:{
         location(newLocation){
             localStorage.location = newLocation;
         }
