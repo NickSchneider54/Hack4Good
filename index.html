@@ -15,7 +15,7 @@
     <div id="app">
         <div id ="jobs" > 
             <!-- v-if="showJobs" [this goes inside of div id="jobs tag"] -->
-            <h2 class="display-4">Jobs Near You</h2>
+            <h2 class="display-4">Jobs Near You</h2><button @click="component('settings')">Search Settings</button>
                 <jobspage 
                 v-for="currentJob in currentJobs.slice(0, 10)"
                 v-bind:currentjob="currentJob"

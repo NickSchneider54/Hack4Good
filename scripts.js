@@ -1,10 +1,4 @@
 
-function job(title, company, description, location){
-    this.title = title,
-    this.company = company,
-    this.description = description,
-    this.location = location
-}
 
 var landingPage = {
     template:
@@ -52,15 +46,14 @@ Vue.component('jobspage', {
     props: ['currentjob'],
     template: 
     `
-    <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
+        <section id="jobsPage">
+            
+            <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header">{{ currentjob.title}} </div>
                 <div class="card-body text-dark">
-                  <p class="card-text">{{ currentjob.employer.name }} </p>
-                </div>
-            
-              
-                </div>
+                    <p class="card-text">{{ currentjob.employer.name }} </p>
+                </div>       
+            </div>
         </section> 
 
     `
@@ -132,31 +125,35 @@ var settings = {
     `
         <section id="settings">
             <div class="title">Search Settings</div>
-            <div id="educationLvl"></div>
-            <div id="jobType"></div>
-            <form action="" id="travelSettings">
-                <select name="maxTravel">
-                    <option value="10">10</option>
-                    <option value="30">30</option>
-                    <option value="60">60</option>
-                </select>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-                <label class="switch">
-                    <input type="checkbox">
-                    <span class="slider round"></span>
-                </label>
-            </form>
+            <div>
+                <label for="educationLvl">Education Level</label>
+                <select id="educationLvl"></select>
+            </div>
+            <div>
+                <label id="jobType">Job Type</label>
+                <select id="jobType"></select>
+            </div>
+            <div class="row" id="searchSettings">
+                <div class="col-sm-8>
+                    <p>Test</p>
+                </div>
+                <div class="custom-control custom-switch">
+                    <label class="custom-control-label" for="customSwitch1">Walking Distance</label>  
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1">                                                         
+                </div>
+                <div class="custom-control custom-switch">
+                    <label class="custom-control-label" for="customSwitch2">Biking Distance</label>
+                    <input type="checkbox" class="custom-control-input" id="customSwitch2">                    
+                </div>
+                <div class="custom-control custom-switch">
+                    <label class="custom-control-label" for="customSwitch3">Busing Distance</label>
+                    <input type="checkbox" class="custom-control-input" id="customSwitch3">                    
+                </div>
+                <div class="custom-control custom-switch">
+                    <label class="custom-control-label" for="customSwitch4">Driving Distance</label>
+                    <input type="checkbox" class="custom-control-input" id="customSwitch4">                    
+                </div>
+            </div>
         </section>
     `,
     props:['component']
@@ -303,8 +300,7 @@ var app = new Vue({
        setLocation: function(frmLocation){
             this.location = frmLocation;
             console.log(this.location);
-       }
-       
+       }       
     },
     mounted(){
         var newLocation;
@@ -363,9 +359,6 @@ function getDistance(origin, destinationsLat, destinationsLong)
         }
     });
   }
-
-
-// getDistance(getLocation(), -93.2916513, 37.1436541);
 
 
 function getLocation(){         
