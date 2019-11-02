@@ -15,7 +15,9 @@ var landingPage = {
     `
         <section id="landingPage">
             <div id="logoView"><img src="workforce-2019-logo-mo-jobs-white.png" alt="jobCenterLogo"></div>
-            <button @click="component('locationPage')" type="submit" class="btn btn-primary" id="landing-btn">Search Jobs</button>
+            <div id="splashContrast">
+                <button @click="component('locationPage')" type="submit" class="btn btn-primary btn-block" id="landing-btn">Search Jobs</button>
+            </div>            
         </section>
     `,
     props:['component']

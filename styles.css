@@ -2,8 +2,8 @@
     color: red;
 }
 
-ul{
-    list-style: none;
+.navbar .form-inline{
+    background-color:#4979ad;
 }
 
 .nav-link{
@@ -11,21 +11,34 @@ ul{
 }
 
 #logoView {
+    margin-top: 20vh;
     height: 75%;
     width: 100%;
+    margin-bottom: 15vh;
 }
 
-#logoView > img {
+#logoView img {
     height: 100%;
     width: 100%;
-    padding-bottom: 50%;
 }
 
-#landing-btn {
-    margin: auto;
+#splashContrast{
+    background-color: rgba(117, 192, 235, .4);
+    margin-top: 10vh;
+    min-height: 40vh;
 }
 
-#landingPage > #landing-btn{
-    width: 75%;
-    height: 150%;
+#landing-btn{
+    width: 80%;
+    margin: auto !important;
+    margin-top: 0;
+    height: 4em !important;
+    background-color: #4979ad;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none !important;
+    border: none !important;
+    font-weight: 400;
+    font-size: 1.2em;
 }
