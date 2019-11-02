@@ -2,9 +2,10 @@ window.addEventListener("load", getJobs);
 
 
 
-function job(title, company, location){
+function job(title, company, description, location){
     this.title = title,
     this.company = company,
+    this.description = description,
     this.location = location
 }
 
@@ -74,6 +75,19 @@ var alertsPage = {
     props:['component']
 }
 
+var favJobs = {
+    template:
+    `
+        <section id="favJobs">
+            <div class="title">Favorite Jobs</div>
+            <div id="favJobsList">
+                <div id="favJob"></div>
+            </div>
+        </section>    
+    `,
+    props:['components']
+}
+
 var app = new Vue({
     el: "#app",
     data: {
@@ -85,7 +99,8 @@ var app = new Vue({
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-        'jobsPage' : jobsPage
+        'jobsPage' : jobsPage,
+        'favJobs' : favJobs
     },
     methods:{
        component: function(component){
