@@ -13,7 +13,7 @@ var landingPage = {
     `
         <section id="landingPage">
             <div id="logoView"></div>
-            <button @click="app.checkSavedLocation()">Search Jobs</button>
+            <button @click="componet('locationPage')">Search Jobs</button>
         </section>
     `,
     props:['component']
@@ -283,7 +283,7 @@ var app = new Vue({
            }
        },
        getLocation: function(){
-           
+
        }
     },
     mounted(){
