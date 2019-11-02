@@ -1,7 +1,6 @@
 window.addEventListener("load", getJobs);
 
 
-
 function job(title, company, description, location){
     this.title = title,
     this.company = company,
@@ -14,7 +13,7 @@ var landingPage = {
     `
         <section id="landingPage">
             <div id="logoView"></div>
-            <button @click="component('locationPage')" type="submit">Search Jobs</button>
+            <button @click="app.checkSavedLocation()">Search Jobs</button>
         </section>
     `,
     props:['component']
@@ -37,7 +36,7 @@ var locationPage = {
                     <div id="alertZip" class="alertMsg"></div>
                     Postal Code<br>
                     <input type="text" id="zip" name="zip"><br><br>
-                    <button onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
+                    <button @click="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -278,6 +277,14 @@ var app = new Vue({
             this.location = frmLocation;
             console.log(this.location);
        },
+       checkSavedLocation: function(){
+           if(localStorage.getItem('location') != ""){
+               this.component('jobsPage');
+           }
+       },
+       getLocation: function(){
+           
+       }
     },
     mounted(){
         if(localStorage.location = newLocation){
