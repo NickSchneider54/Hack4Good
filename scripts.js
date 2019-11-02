@@ -27,14 +27,17 @@ var locationPage = {
             <div id="currentLocation"><button @click="component('jobsPage')">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
-                <form action="">
+                <form action="#" onsubmit="app.formValidation(this.form); return false">
+                    <div id="alertAddress"></div>
                     Street Address<br>
-                    <input type="text" id="address">
+                    <input type="text" id="address" name="address">
+                    <div id="alertCity"></div>
                     City<br>
-                    <input type="text" id="city">
+                    <input type="text" id="city" name="city">
+                    <div id="alertZip"></div>
                     Postal Code<br>
-                    <input type="text" id="zip">
-                    <button @click="formValidation(this)">Use This Address</button>
+                    <input type="text" id="zip" name="zip">
+                    <button type="submit">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -213,7 +216,9 @@ var app = new Vue({
         location: "",
         favorites: [],
         currentJobs: getJobs(),
-        currentComponent: 'landingPage'
+        currentComponent: 'landingPage',
+        validateVar: "",
+        isValid: true
     },
     components:{
         'landingPage' : landingPage,
@@ -232,7 +237,26 @@ var app = new Vue({
            this.currentComponent = component;
        },
        formValidation: function(frm){
-
+           console.log(frm);
+           if(frm.address.value == "") {
+               this.isValid = false;
+               this.validateVar = document.getElementById("alertAddress");
+               runAlert(this.validateVar);
+           }
+           if(frm.city.value == "") {
+               this.isValid = false;
+               this.validateVar = document.getElementById("alertCity");
+               runAlert(this.validateVar);
+           }
+           if(frm.zip.value == "") {
+               this.isValid = false;
+               this.validateVar = document.getElementById("alertZip");
+               runAlert(this.validateVar);
+           }
+       },
+       runAlert: function(validation) {
+           document.getElementById(validation).innerHTML = "required fields are missing";
+           document.getElementById(validation).style.color = "red";
        },
        setLocation: function(){
 
