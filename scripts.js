@@ -1,25 +1,11 @@
 window.addEventListener("load", getJobs);
 
- //get JOBS
- function getJobs() {
-    var httpRequest = new XMLHttpRequest();
-    var token = "iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf"
-    httpRequest.open("get", `https://jobs.api.sgf.dev/api/job?api_token=${token}`);
-    httpRequest.onreadystatechange = loadJobs;
-    
-    function loadJobs() {
-        
-        if (httpRequest.readyState == 4 && httpRequest.status == 200) {
-            var jobs = httpRequest.responseText;
-            var jobListings = JSON.parse(jobs);
-            console.log(jobListings);
-        }
-    }
-};
 
-function job(title, company, location){
+
+function job(title, company, description, location){
     this.title = title,
     this.company = company,
+    this.description = description,
     this.location = location
 }
 
@@ -223,7 +209,7 @@ var eventDetails = {
 
 var app = new Vue({
     el: "#app",
-    data:{
+    data: {
         location: "",
         favorites: [],
         currentJobs: [],
@@ -232,7 +218,8 @@ var app = new Vue({
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-        'jobsPage' : jobsPage
+        'jobsPage' : jobsPage,
+        'favJobs' : favJobs
     },
     methods:{
        component: function(component){
@@ -240,6 +227,25 @@ var app = new Vue({
        }
     }
 });
+
+//get JOBS
+function getJobs() {
+    // axios({
+    //     url: 'https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf',
+    //     method: 'get',
+    //   })
+    //   .then((response) => {
+    //     return response;
+    //   }, (error) => {
+    //     return error; 
+    //   });
+    $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
+        
+    }});
+}
+
+
+
 
 
 
