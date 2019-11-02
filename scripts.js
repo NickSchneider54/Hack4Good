@@ -304,11 +304,7 @@ function getJobs() {
     return array;
 }
 
-function calculateTravel(){
-    $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&transit_mode={{transit}}&origins={{app.location}}&destinations={{currentJob[i].location}}&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
-        result.data.foreach
-    }});
-}
+
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);

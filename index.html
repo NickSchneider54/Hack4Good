@@ -13,13 +13,13 @@
 
     <div id="app">
         <div :is="currentComponent" :component="component"></div>   
-        <nav class=" nav fixed-bottom">
-            <ul class="nav-bar-nav">
-                <li @click="component('mapPage')" class="nav-item"><button class="btn btn-primary">Map</button></li>
-                <li @click="component('alertsPage')" class="nav-item"><button class="btn btn-primary">Alerts</button></li>
-                <li @click="component('favoritesPage')" class="nav-item"><button class="btn btn-primary">Favorites</button></li>
-                <li @click="component('eventsPage')" class="nav-item"><button class="btn btn-primary">Events</button></li>
-            </ul>
+        <nav class="navbar fixed-bottom bg-primary">
+            <form class="form-inline m-auto">
+                <input @click="component('mapPage')" class="btn btn-primary" type="button" value="Map">
+                <input @click="component('alertsPage')" class="btn btn-primary" type="button" value="Alerts">
+                <input @click="component('favoritesPage')" class="btn btn-primary" type="button" value="Favorites">
+                <input @click="component('eventsPage')" class="btn btn-primary" type="button" value="Events">
+            </form>
         </nav>
     </div>
     

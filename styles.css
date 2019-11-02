@@ -1,3 +1,11 @@
 .alertMsg{
     color: red;
 }
+
+ul{
+    list-style: none;
+}
+
+.nav-link{
+    display: inline-block !important;
+}
