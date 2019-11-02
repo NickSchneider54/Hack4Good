@@ -13,7 +13,13 @@ var landingPage = {
     props:['component']
 }
 
-
+var jobsPage = {
+    template: 
+    `
+        <h2>Jobs Near You</h2>   
+    `,
+    props:['component']
+}
 
 var locationPage = {
     template:
@@ -24,7 +30,7 @@ var locationPage = {
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 
-                <form action="component(jobspage)">
+                <form action="component(jobsPage)">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -235,6 +241,7 @@ var app = new Vue({
         'jobDetails' : jobDetails,
         'mapPage' : mapPage,
         'eventDetails' : eventDetails,
+        'jobsPage' : jobsPage
     },
     
     methods:{
@@ -277,6 +284,7 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
+                component('jobsPage');
                                 
             }          
        },
