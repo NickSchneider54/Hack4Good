@@ -27,8 +27,8 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
-            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
-            <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
+            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary btn-block">Use Current Location</button></div>
+            <div id="divider"><i class="line"></i><span>OR</span><i class="line"></i></div>
             <div id="locationForm">
                 <form action="component(jobsPage)">
                     <div id="alertAddress" class="alertMsg"></div>
@@ -40,7 +40,7 @@ var locationPage = {
                     <div id="alertZip" class="alertMsg"></div>
                     Postal Code<br>
                     <input type="text" id="zip" name="zip"><br><br>
-                    <button onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
+                    <button onclick="return app.formValidation(this.form)" class="btn btn-primary btn-block" name="submit" type="button" id="useAddress">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -54,16 +54,14 @@ var jobsPage = {
     `
         <section id="jobsPage">
             <div id="topBanner">Jobs Near Me</div>
-                <div id="searchBanner">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header"></div>
-                <div class="card-body text-dark">
-                  
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-              
-                </div>
+            <div id="searchBanner">
+                <div class="card border-dark mb-3 m-auto" style="max-width: 20rem;">
+                    <div class="card-header"></div>
+                    <div class="card-body text-dark">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>  
+            </div>
         </section> 
     `,
     props:['component']
@@ -74,9 +72,9 @@ var alertsPage = {
     `
         <section id="alerts">
             <div class="title">Alerts</div>
-            <section id="alertTabs">
-                <div id="jobsTab"><button onclick="showJobAlerts()" class="btn btn-primary">Jobs</button></div>
-                <div id="eventsTab"><button onclick="showEventAlerts()" class="btn btn-primary">Events</button></div>
+            <section id="alertTabs" class="form-inline m-auto">
+                <div id="jobsTab"><button onclick="showJobAlerts()" class="btn btn-primary btn-block">Jobs</button></div>
+                <div id="eventsTab"><button onclick="showEventAlerts()" class="btn btn-primary btn-block">Events</button></div>
                 <div id="jobListingAlerts">
                     <div id="jobListingAlert"></div>
                 </div>
@@ -95,7 +93,16 @@ var favoritesPage = {
         <section id="favoritesPage">
             <div class="title">Favorite Jobs</div>
             <div id="favJobsList">
-                <div id="favJob"></div>
+                <div id="searchBanner">
+                    <input type="text" placeholder="Search.." name="search">
+                    <i class="settingsCog"></i>
+                </div>
+                <div class="card border-dark mb-3 m-auto" style="max-width: 20rem;">
+                    <div class="card-header"></div>
+                    <div class="card-body text-dark">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>  
             </div>
         </section>
     `,
@@ -108,7 +115,12 @@ var eventsPage = {
         <section id="eventsPage">
             <div class="title">Events</div>
             <div id="eventListings">
-                <div id="eventLisitng"></div>
+                <div class="card border-dark mb-3 m-auto" style="max-width: 20rem;">
+                    <div class="card-header"></div>
+                    <div class="card-body text-dark">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>  
             </div>
         </section>
     `,
@@ -181,11 +193,11 @@ var mapPage = {
                 <div id="eventMap">Event Map</div>
             </div>
             <!-- Add Map -->
-            <div id="transportationTypes">
-                <button onclick="showMapWalk()" class="btn btn-primary">Walk</button>
-                <button onclick="showMapBike()" class="btn btn-primary">Bike</button>
-                <button onclick="showMapBus()" class="btn btn-primary">Bus</button>
-                <button onclick="showMapCar()" class="btn btn-primary">Car</button>
+            <div id="transportationTypes" class="form-inline m-auto">
+                <button onclick="showMapWalk()" id="fix-btn" class="btn btn-primary btn-block">Walk</button>
+                <button onclick="showMapBike()" class="btn btn-primary btn-block">Bike</button>
+                <button onclick="showMapBus()" class="btn btn-primary btn-block">Bus</button>
+                <button onclick="showMapCar()" class="btn btn-primary btn-block">Car</button>
             </div>
             <div id="address"></div>
             <div id="transportInfo">

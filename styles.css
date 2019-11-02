@@ -42,3 +42,56 @@
     font-weight: 400;
     font-size: 1.2em;
 }
+
+#currentLocation, #useAddress {
+    width: 85%;
+    margin: auto !important;
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+}
+
+#divider span {
+    margin: auto;
+}
+
+#address, #city, #zip {
+    width: 85%;
+}
+
+#alertsTab {
+    width: 90%;
+}
+
+#jobsTab, #eventsTab {
+    width: 50%;
+}
+
+#transportationTypes button {
+    width: 25%;
+}
+
+#fix-btn {
+    margin-top: .5rem;
+}
+
+#eventMap {
+    display: none;
+}
+
+.title {
+    text-align: center;
+}
+
+.card {
+    margin-top: 1em !important;
+}
+
+#topBanner {
+    text-align: center;
+}
+
+#searchBanner {
+    margin: auto;
+    margin-top: 1em;
+    width: 86%;
+}
