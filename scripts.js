@@ -415,6 +415,4 @@ function convertLatLng(lat, lng){
     });            
 }
 
-app.component('jobsPage')
-
-console.log(localStorage.getItem("lat"))
+//app.component('jobsPage')
