@@ -34,7 +34,7 @@ var locationPage = {
                     <input type="text" id="city">
                     Postal Code<br>
                     <input type="text" id="zip">
-                    <button @click="" type="submit">Use This Address</button>
+                    <button @click="formValidation(this)">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -230,6 +230,9 @@ var app = new Vue({
     methods:{
        component: function(component){
            this.currentComponent = component;
+       },
+       formValidation(frm){
+
        }
     },
     mounted(){
