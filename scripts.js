@@ -27,6 +27,7 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
+            <div id="loacationHeader">Set Location</div>
             <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
