@@ -46,6 +46,7 @@ var locationPage = {
                 </form>
             </div>
             <div class="bottomBanner"></div>
+            <button onclick="getTravelInfo(app.currentJobs[0])">Test Google API</button>
         </section>    
     `,
     props:['component']
@@ -248,6 +249,7 @@ var app = new Vue({
         location: "",
         favorites: [],
         currentJobs: [],
+        trvlConstraints: [],
         currentComponent: 'landingPage',
         },
     components:{
@@ -313,12 +315,19 @@ var app = new Vue({
        
     },
     mounted(){
+        var aryTravelInfo = [];
         var newLocation;
         if(localStorage.location){
             this.location = localStorage.location;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
+                       
             this.currentJobs = response.data.data
+
+            for(var i = 0; i < 10; i++){
+                aryTravelInfo.push(getTravelInfo(this.currentJobs[i]));
+                this.currentJobs[i].locations.data.push(aryTravelInfo[i]);
+            }
         })
     },
     watch:{
@@ -330,18 +339,30 @@ var app = new Vue({
 
 //get JOBS
 
-function getJobs() {
-    var aryJobs = []
-    $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
-        result.data.forEach((element, index) => {
-            aryJobs.push(element); 
-        });
+// function getJobs() {
+//     var aryJobs = [];
+//     var aryTravelInfo = [];
+//     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
+//         result.data.forEach((element) => {
+                     
+//         });
         
+//     }});    
+//     return aryJobs;    
+// }
+
+function getTravelInfo(element){ 
+    var aryTravelTime = [];      
+    $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&travel_mode=driving|walking|transit&origins=localStorage.location.data&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
+        result.data.forEach((trvlInfo, index) =>{
+            aryTravelTime.push(trvlInfo);
+        });
+        console.log(aryTravelTime);
+        return aryTravelTime;
     }});
-    
-    return aryJobs;
-    
+        
 }
+
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
