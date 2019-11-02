@@ -333,6 +333,7 @@ var app = new Vue({
                 aryTravelInfo.push(getTravelInfo(this.currentJobs[i]));
                 this.currentJobs[i].locations.data.push(aryTravelInfo[i]);
             }
+       
         })
     },
     watch:{
@@ -369,6 +370,31 @@ function getTravelInfo(element){
         
 }
 
+function getDistance(originLat, originLong, destinationsLat, destinationsLong)
+  {
+     //Find the distance
+     var distanceService = new google.maps.DistanceMatrixService();
+     distanceService.getDistanceMatrix({
+        origins: [{lat: 55.93, lng: -3.118}],
+        destinations: [{lat: 50.087, lng: 14.421}],
+        travelMode: google.maps.TravelMode.WALKING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        durationInTraffic: true,
+        avoidHighways: false,
+        avoidTolls: false
+    },
+    function (response, status) {
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+            console.log('Error:', status);
+        } else {
+            console.log(response);
+            // response.rows[0].elements[0].distance.text;
+            // response.rows[0].elements[0].distance.text;
+        }
+    });
+  }
+
+getDistance();
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
@@ -377,7 +403,9 @@ function getLocation(){
 function locationFound(position){
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
+    var userLocation = [lat, long];
     convertLatLng(lat, lng);
+    return userLocation;
 }
 
 function convertLatLng(lat, lng){
