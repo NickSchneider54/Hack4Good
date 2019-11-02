@@ -219,7 +219,7 @@ var app = new Vue({
         'landingPage' : landingPage,
         'locationPage' : locationPage,
         'jobsPage' : jobsPage,
-        'favJobs' : favJobs
+        'favoriteJobs' : favoriteJobs
     },
     methods:{
        component: function(component){
