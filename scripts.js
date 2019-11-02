@@ -96,15 +96,6 @@ var app = new Vue({
 
 //get JOBS
 function getJobs() {
-    // axios({
-    //     url: 'https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf',
-    //     method: 'get',
-    //   })
-    //   .then((response) => {
-    //     return response;
-    //   }, (error) => {
-    //     return error; 
-    //   });
     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
         
     }});
