@@ -370,13 +370,13 @@ function getTravelInfo(element){
         
 }
 
-function getDistance(originLat, originLong, destinationsLat, destinationsLong)
+function getDistance(origin, destinationsLat, destinationsLong)
   {
      //Find the distance
      var distanceService = new google.maps.DistanceMatrixService();
      distanceService.getDistanceMatrix({
-        origins: [{lat: 55.93, lng: -3.118}],
-        destinations: [{lat: 50.087, lng: 14.421}],
+        origins: [{lat: origin[0], lng: origin[1]}],
+        destinations: [{lat: destinationsLat, lng: destinationsLong}],
         travelMode: google.maps.TravelMode.WALKING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         durationInTraffic: true,
@@ -394,18 +394,18 @@ function getDistance(originLat, originLong, destinationsLat, destinationsLong)
     });
   }
 
-getDistance();
+getDistance(getLocation(), 37.1436541, -93.2916513);
 
 function getLocation(){         
-    navigator.geolocation.getCurrentPosition(locationFound);
-}
-
-function locationFound(position){
+    navigator.geolocation.getCurrentPosition(locationFound(lat, lng));
     var lat = position.coords.latitude;
     var lng = position.coords.longitude;
     var userLocation = [lat, long];
-    convertLatLng(lat, lng);
     return userLocation;
+}
+
+function locationFound(userLat, userLong){
+    convertLatLng(lat, lng);
 }
 
 function convertLatLng(lat, lng){
