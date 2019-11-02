@@ -27,17 +27,17 @@ var locationPage = {
             <div id="currentLocation"><button @click="component('jobsPage')">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
-                <form action="#">
-                    <div id="alertAddress"></div>
+                <form action="component(jobsPage)">
+                    <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
-                    <div id="alertCity"></div>
+                    <div id="alertCity" class="alertMsg"></div>
                     City<br>
                     <input type="text" id="city" name="city">
-                    <div id="alertZip"></div>
+                    <div id="alertZip" class="alertMsg"></div>
                     Postal Code<br>
-                    <input type="text" id="zip" name="zip">
-                    <input onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="submit" value="Use This Address">
+                    <input type="text" id="zip" name="zip"><br><br>
+                    <button onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -217,8 +217,7 @@ var app = new Vue({
         favorites: [],
         currentJobs: getJobs(),
         currentComponent: 'landingPage',
-        validateVar: "",
-        isValid: true
+        
     },
     components:{
         'landingPage' : landingPage,
@@ -238,24 +237,47 @@ var app = new Vue({
        },
        formValidation: function(frm){
             var isValid = true;
-            if(frm.address.value == ""){
-                isValid = false;
-                document.getElementById('alertAddress').innerHTML = "required fields are missing";                       
-            }  
-            if(frm.city.value == ""){
-                isValid = false;
-                document.getElementById('alertCity').innerHTML = "required fields are missing";
-            }  
-            if(frm.zip.value == ""){
-                isValid = false;
-                document.getElementById('alertZip').innerHTML = "required fields are missing";                 
+            var alertAddress = document.getElementById('alertAddress');
+            var alertCity = document.getElementById('alertCity');
+            var alertZip = document.getElementById('alertZip');
+            var regexAddress = /^\d+\s[A-z]+\s[A-z]+/;
+            var regexCity = /[a-z]+[a-z]+[a-z]+./;
+            var regexZip = /\d{5}/;
+            if(frm.address.value == ""){                
+                alertAddress.innerHTML = "required fields are missing";      
+                isValid = false;                 
             } 
-            this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-            return isValid;        
+            else if(regexAddress.test(frm.address.value) != true){
+                alertAddress.innerHTML = "invalid address"
+                isValid = false;  
+            } 
+            if(frm.city.value == ""){                
+                alertCity.innerHTML = "required fields are missing";
+                isValid = false;
+            }
+            else if(regexCity.test(frm.city.value)){
+                alertCity.innerHTML = "invalid city name"
+            }
+            if(frm.zip.value == ""){                
+                alertZip.innerHTML = "required fields are missing";   
+                isValid = false;              
+            }
+            else if(regexZip.test(frm.zip.value) != true){
+                alertZip.innerHTML = "invalid postal code";
+                isValid = false;
+            }
+            if(isValid == false){
+                return isValid; 
+            }   
+            else{
+                this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
+                this.component('jobsPage');
+            }          
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
-       }
+            console.log(this.location);
+       },
     },
     mounted(){
         if(localStorage.location = newLocation){
