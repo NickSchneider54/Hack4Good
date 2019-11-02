@@ -13,7 +13,7 @@ var landingPage = {
     `
         <section id="landingPage">
             <div id="logoView"></div>
-            <button @click="componet('locationPage')">Search Jobs</button>
+            <button @click="component('locationPage')" type="submit">Search Jobs</button>
         </section>
     `,
     props:['component']
@@ -36,7 +36,7 @@ var locationPage = {
                     <div id="alertZip" class="alertMsg"></div>
                     Postal Code<br>
                     <input type="text" id="zip" name="zip"><br><br>
-                    <button @click="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
+                    <button onclick="return app.formValidation(this.form)" class="btn btn-primary" name="submit" type="button">Use This Address</button>
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -277,14 +277,6 @@ var app = new Vue({
             this.location = frmLocation;
             console.log(this.location);
        },
-       checkSavedLocation: function(){
-           if(localStorage.getItem('location') != ""){
-               this.component('jobsPage');
-           }
-       },
-       getLocation: function(){
-
-       }
     },
     mounted(){
         if(localStorage.location = newLocation){
