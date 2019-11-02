@@ -182,7 +182,7 @@ var mapPage = {
             <div id="transportationTypes">
                 <button onclick="showMapWalk()" class="btn btn-primary">Walk</button>
                 <button onclick="showMapBike()" class="btn btn-primary">Bike</button>
-                <button onclick="showMapBus()" class="btn btn-primary>Bus</button>
+                <button onclick="showMapBus()" class="btn btn-primary">Bus</button>
                 <button onclick="showMapCar()" class="btn btn-primary">Car</button>
             </div>
             <div id="address"></div>
@@ -290,8 +290,9 @@ var app = new Vue({
        
     },
     mounted(){
-        if(localStorage.location = newLocation){
-            this.location = localstorage.location;
+        var newLocation;
+        if(localStorage.location){
+            this.location = localStorage.location;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
             this.currentJobs = response.data
