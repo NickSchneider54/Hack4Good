@@ -1,7 +1,3 @@
-//window.addEventListener("load", getJobs);
-
-//var aryCurrentJobs = getJobs();
-
 
 function job(title, company, description, location){
     this.title = title,
@@ -27,10 +23,12 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
-            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary btn-block">Use Current Location</button></div>
-            <div id="divider"><i class="line"></i><span>OR</span><i class="line"></i></div>
+            <div id="loacationHeader">Set Location</div>
+            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
+            <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
-                <form action="component(jobsPage)">
+                
+                <form action="component(jobspage)">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -44,28 +42,30 @@ var locationPage = {
                 </form>
             </div>
             <div class="bottomBanner"></div>
+            <button onclick="getTravelInfo(app.currentJobs[0])">Test Google API</button>
         </section>    
     `,
     props:['component']
 }
 
-var jobsPage = {
+Vue.component('jobspage', {
+    props: ['currentjob'],
     template: 
     `
-        <section id="jobsPage">
-            <div id="topBanner">Jobs Near Me</div>
-            <div id="searchBanner">
-                <div class="card border-dark mb-3 m-auto" style="max-width: 20rem;">
-                    <div class="card-header"></div>
-                    <div class="card-body text-dark">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>  
-            </div>
+    <section id="jobsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{ currentjob.title}} </div>
+                <div class="card-body text-dark">
+                  <p class="card-text">{{ currentjob.employer.name }} </p>
+                </div>
+            
+              
+                </div>
         </section> 
-    `,
-    props:['component']
-}
+
+    `
+})
+
 
 var alertsPage = {
     template:
@@ -237,21 +237,24 @@ var app = new Vue({
     el: "#app",
     data: {
         location: "",
+        lat: "",
+        lng: "",
         favorites: [],
         currentJobs: [],
+        trvlConstraints: [],
         currentComponent: 'landingPage',
         },
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
-        'jobsPage' : jobsPage,
+
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
         'eventsPage' : eventsPage,
         'settings' : settings,
         'jobDetails' : jobDetails,
         'mapPage' : mapPage,
-        'eventDetails' : eventDetails
+        'eventDetails' : eventDetails,
     },
     
     methods:{
@@ -294,7 +297,7 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                this.component('jobsPage');
+                                
             }          
        },
        setLocation: function(frmLocation){
@@ -305,43 +308,75 @@ var app = new Vue({
     },
     mounted(){
         var newLocation;
+        var newLat;
+        var newLng;
         if(localStorage.location){
             this.location = localStorage.location;
         }
+        if(localStorage.lat){
+            this.lat = localStorage.lat;
+        }
+        if(localStorage.lng){
+            this.lng = localStorage.lng;
+        }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-            this.currentJobs = response.data
+                       
+            this.currentJobs = response.data.data
+       
         })
     },
     watch:{
         location(newLocation){
             localStorage.location = newLocation;
+            
+        },
+        lat(newLat){
+            localStorage.lat = newLat;
+        },
+        lng(newLng){
+            localStorage.lng = newLng;
         }
     }
 });
 
-//get JOBS
+function getDistance(origin, destinationsLat, destinationsLong)
+  {
+      
+     //Find the distance
+     var distanceService = new google.maps.DistanceMatrixService();
+     distanceService.getDistanceMatrix({
+        origins: [{lat: origin[0], lng: origin[1]}],
+        destinations: [{lat: destinationsLat, lng: destinationsLong}],
+        travelMode: google.maps.TravelMode.WALKING,
+        unitSystem: google.maps.UnitSystem.IMPERIAL,
+        durationInTraffic: true,
+        avoidHighways: false,
+        avoidTolls: false
+    },
+    function (response, status) {
+        if (status !== google.maps.DistanceMatrixStatus.OK) {
+            console.log('Error:', status);
+        } else {
+            console.log(response);
+            // response.rows[0].elements[0].distance.text;
+            // response.rows[0].elements[0].distance.text;
+        }
+    });
+  }
 
-function getJobs() {
-    var aryJobs = []
-    $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
-        result.data.forEach((element, index) => {
-            aryJobs.push(element); 
-        });
-        
-    }});
-    
-    return aryJobs;
-    
-}
+
+// getDistance(getLocation(), -93.2916513, 37.1436541);
+
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
 }
 
 function locationFound(position){
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    convertLatLng(lat, lng);
+    app.lat = position.coords.latitude;
+    app.lng = position.coords.longitude;
+    convertLatLng(app.lat, app.lng);
+    console.log(lat, lng);
 }
 
 function convertLatLng(lat, lng){
@@ -356,7 +391,7 @@ function convertLatLng(lat, lng){
                 alert("Could not find your current location");
             }
         }
-        app.component('jobsPage');
+        
     });            
 }
 
