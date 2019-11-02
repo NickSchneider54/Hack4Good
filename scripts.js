@@ -1,4 +1,6 @@
-window.addEventListener("load", getJobs);
+//window.addEventListener("load", getJobs);
+
+//var aryCurrentJobs = getJobs();
 
 
 function job(title, company, description, location){
@@ -51,7 +53,15 @@ var jobsPage = {
         <section id="jobsPage">
             <div id="topBanner">Jobs Near Me</div>
                 <div id="searchBanner">
-            </div>
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">{{currentJobs[0].title}}</div>
+                <div class="card-body text-dark">
+                  
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+              </div>
+              
+                </div>
         </section> 
     `,
     props:['component']
@@ -214,10 +224,9 @@ var app = new Vue({
     data: {
         location: "",
         favorites: [],
-        currentJobs: getJobs(),
+        currentJobs: [],
         currentComponent: 'landingPage',
-        
-    },
+        },
     components:{
         'landingPage' : landingPage,
         'locationPage' : locationPage,
@@ -230,6 +239,7 @@ var app = new Vue({
         'mapPage' : mapPage,
         'eventDetails' : eventDetails
     },
+    
     methods:{
        component: function(component){
            this.currentComponent = component;
@@ -283,6 +293,9 @@ var app = new Vue({
         if(localStorage.location = newLocation){
             this.location = localstorage.location;
         }
+        axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
+            this.currentJobs = response.data
+        })
     },
     watch:{
         location(newLocation){
@@ -292,15 +305,18 @@ var app = new Vue({
 });
 
 //get JOBS
+
 function getJobs() {
-    var array = new Array();
+    var aryJobs = []
     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
         result.data.forEach((element, index) => {
-            array.push(element);
+            aryJobs.push(element); 
         });
+        
     }});
-
-    return array;
+    
+    return aryJobs;
+    
 }
 
 function calculateTravel(){
