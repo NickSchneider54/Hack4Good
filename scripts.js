@@ -44,7 +44,6 @@ var locationPage = {
                 </form>
             </div>
             <div class="bottomBanner"></div>
-            <button onclick="getTravelInfo(app.currentJobs[0])">Test Google API</button>
         </section>    
     `,
     props:['component']
