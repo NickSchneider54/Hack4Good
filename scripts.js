@@ -231,7 +231,10 @@ var app = new Vue({
        component: function(component){
            this.currentComponent = component;
        },
-       formValidation(frm){
+       formValidation: function(frm){
+
+       },
+       setLocation: function(){
 
        }
     },
