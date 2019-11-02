@@ -27,6 +27,7 @@ var locationPage = {
             <div id="currentLocation"><button @click="component('jobsPage')">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
+<<<<<<< Updated upstream
                 <form action="#" onsubmit="app.formValidation(this.form); return false">
                     <div id="alertAddress"></div>
                     Street Address<br>
@@ -38,6 +39,16 @@ var locationPage = {
                     Postal Code<br>
                     <input type="text" id="zip" name="zip">
                     <button type="submit">Use This Address</button>
+=======
+                <form action="">
+                    Street Address
+                    <input type="text" name="address" id="address">
+                    City
+                    <input type="text" name="city" id="city">
+                    Postal Code
+                    <input type="text" name="zip" id="zip">
+                    <button @click="formValidation(this)">Use This Address</button>
+>>>>>>> Stashed changes
                 </form>
             </div>
             <div class="bottomBanner"></div>
@@ -81,7 +92,7 @@ var alertsPage = {
 var favoritesPage = {
     template: 
     `
-        <section id="favJobs">
+        <section id="favoritesPage">
             <div class="title">Favorite Jobs</div>
             <div id="favJobsList">
                 <div id="favJob"></div>
@@ -104,10 +115,10 @@ var events = {
     props:['component']
 }
 
-var jobSearchSettings = {
+var settings = {
     template:
     `
-        <section id="jobSearchSettings">
+        <section id="settings">
             <div class="title">Search Settings</div>
             <div id="educationLvl"></div>
             <div id="jobType"></div>
@@ -161,7 +172,7 @@ var jobDetails = {
     props:['component']
 }
 
-var placeholder = {
+var mapPage = {
     template:
     `
         <section id="mapToJob mapToEvent">
@@ -227,9 +238,9 @@ var app = new Vue({
         'alertsPage' : alertsPage,
         'favoritesPage' : favoritesPage,
         'events' : events,
-        'jobSearchSettings' : jobSearchSettings,
+        'settings' : settings,
         'jobDetails' : jobDetails,
-        'placeholder' : placeholder,
+        'mapPage' : mapPage,
         'eventDetails' : eventDetails
     },
     methods:{
@@ -237,29 +248,10 @@ var app = new Vue({
            this.currentComponent = component;
        },
        formValidation: function(frm){
-           console.log(frm);
-           if(frm.address.value == "") {
-               this.isValid = false;
-               this.validateVar = document.getElementById("alertAddress");
-               runAlert(this.validateVar);
-           }
-           if(frm.city.value == "") {
-               this.isValid = false;
-               this.validateVar = document.getElementById("alertCity");
-               runAlert(this.validateVar);
-           }
-           if(frm.zip.value == "") {
-               this.isValid = false;
-               this.validateVar = document.getElementById("alertZip");
-               runAlert(this.validateVar);
-           }
+        
        },
-       runAlert: function(validation) {
-           document.getElementById(validation).innerHTML = "required fields are missing";
-           document.getElementById(validation).style.color = "red";
-       },
-       setLocation: function(){
-
+       setLocation: function(frmLocation){
+            this.location = frmLocation;
        }
     },
     mounted(){
