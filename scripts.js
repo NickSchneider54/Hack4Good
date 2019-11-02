@@ -220,11 +220,21 @@ var app = new Vue({
         'locationPage' : locationPage,
         'jobsPage' : jobsPage,
         'favoriteJobs' : favoriteJobs
-    },
+    },    
     methods:{
        component: function(component){
            this.currentComponent = component;
        }
+    },
+    mounted(){
+        if(localStorage.location = newLocation){
+            this.location = localstorage.location;
+        }
+    },
+    watch(){
+        location(newLocation){
+            localStorage.location = newLocation;
+        }
     }
 });
 
