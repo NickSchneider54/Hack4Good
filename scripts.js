@@ -3,34 +3,8 @@ window.addEventListener("load", function(){
 });
 
 
-Vue.component('landing', {
-    template:
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-   
-=======
-        ``
->>>>>>> master
-    
-=======
-
-    `
-        <section id="landing">
-            <div id="logoView"></div>
-            <button onclick="searchFunction()"></button>
-        </section>
-
-    `
->>>>>>> Stashed changes
-
-})
-
 app.getJobs();
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 var app = new Vue({
     el: "#app",
     data:{
@@ -39,9 +13,6 @@ var app = new Vue({
         currentJobs: [],
 
     },
-<<<<<<< HEAD
-})
-=======
     methods:{
         //get JOBS
         getJobs: function() {
@@ -61,5 +32,3 @@ var app = new Vue({
         }
     }
 })
-
->>>>>>> master
