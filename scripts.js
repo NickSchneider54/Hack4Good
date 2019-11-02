@@ -54,7 +54,7 @@ var jobsPage = {
             <div id="topBanner">Jobs Near Me</div>
                 <div id="searchBanner">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header">{{currentJobs[0].title}}</div>
+                <div class="card-header"></div>
                 <div class="card-body text-dark">
                   
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -320,8 +320,6 @@ function getJobs() {
     
 }
 
-
-
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
 }
@@ -344,6 +342,7 @@ function convertLatLng(lat, lng){
                 alert("Could not find your current location");
             }
         }
+        app.component('jobsPage');
     });            
 }
 
