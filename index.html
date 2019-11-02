@@ -12,13 +12,12 @@
 <body>
 
     <div id="app">
-<<<<<<< Updated upstream
-        <!-- <section id="landing">
+        <section id="landing">
             <div id="logoView"></div>
-            <button onclick="searchFunction()"></button>
-        </section> -->
-        <!-- <section id="searchForm">
-            <div id="currentLocation"><button onclick="getLocation()"></button></div>
+            <button onclick="searchFunction()">Search Jobs</button>
+        </section>
+        <section id="searchForm">
+            <div id="currentLocation"><button onclick="getLocation()">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
                 <form action="">
@@ -32,15 +31,99 @@
                 </form>
             </div>
             <div class="bottomBanner"></div>
-        </section> -->
-        <!-- <section id="jobsView">
+        </section>
+        <section id="jobsView">
             <div id="topBanner">Jobs Near Me</div>
             <div id="searchBanner">
             </div>
-        </section> -->
-=======
-
->>>>>>> Stashed changes
+        </section>
+        <section id="alerts">
+            <div class="title">Alerts</div>
+            <section id="alertTabs">
+                <div id="jobsTab"><button onclick="showJobAlerts()">Jobs</button></div>
+                <div id="eventsTab"><button onclick="showEventAlerts()">Events</button></div>
+                <div id="jobListingAlerts">
+                    <div id="jobListingAlert"></div>
+                </div>
+                <div id="eventListingAlerts">
+                    <div id="eventLisitngAlert"></div>
+                </div>
+            </section>
+        </section>
+        <section id="favJobs">
+            <div class="title">Favorite Jobs</div>
+            <div id="favJobsList">
+                <div id="favJob"></div>
+            </div>
+        </section>
+        <section id="events">
+            <div class="title">Events</div>
+            <div id="eventListings">
+                <div id="eventLisitng"></div>
+            </div>
+        </section>
+        <section id="jobSearchSettings">
+            <div class="title">Search Settings</div>
+            <div id="educationLvl"></div>
+            <div id="jobType"></div>
+            <form action="" id="travelSettings">
+                <select name="maxTravel">
+                    <option value="10">10</option>
+                    <option value="30">30</option>
+                    <option value="60">60</option>
+                </select>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </form>
+        </section>
+        <section id="jobDetails">
+            <div class="title">Job Details</div>
+            <div id="jobTitle"></div>
+            <div id="jobDescription"></div>
+            <button onclick="callSiteForMore()">More</button>
+            <div id="mapBar">
+                <div id="openMap"><button onclick="openMap()">Map</button></div>
+                <div id="address"></div>
+            </div>
+            <div id="jobInfo">
+                <div id="pay">10.00/hr</div>
+                <div id="hourType">Part-Time</div>
+                <div id="jobRequirements">High School</div>
+            </div>
+        </section>
+        <section id="mapToJob mapToEvent">
+            <div class="title">
+                <div id="jobMap">Job Map</div>
+                <div id="eventMap">Event Map</div>
+            </div>
+            <!-- Add Map -->
+            <div id="transportationTypes">
+                <button onclick="showMapWalk()">Walk</button>
+                <button onclick="showMapBike()">Bike</button>
+                <button onclick="showMapBus()">Bus</button>
+                <button onclick="showMapCar()">Car</button>
+            </div>
+            <div id="address"></div>
+            <div id="transportInfo">
+                <div id="travelTime"></div>
+                <div id="distance"></div>
+                <div id="transportType"></div>
+            </div>
+        </section>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
