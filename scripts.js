@@ -285,7 +285,7 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                component('jobsPage');
+                this.component('jobsPage');
                                 
             }          
        },
