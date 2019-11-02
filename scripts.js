@@ -30,6 +30,7 @@ var locationPage = {
             <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
             <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
             <div id="locationForm">
+                
                 <form action="component(jobsPage)">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
@@ -49,22 +50,40 @@ var locationPage = {
     props:['component']
 }
 
+Vue.component('jobspage', {
+    props: ['currentjob'],
+    template: 
+    `
+    <div class="jobspage">
+    <p>{{ currentjob.title }}</p>
+    </div>
+    `
+})
+
+
+
 var jobsPage = {
     template: 
     `
+    <jobspage 
+        v-for="currentJob in currentJobs"
+        v-bind:key="currentJob.id"
+        v-bind:currentjob="currentJob"
+        >
         <section id="jobsPage">
             <div id="topBanner">Jobs Near Me</div>
                 <div id="searchBanner">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                 <div class="card-header"></div>
                 <div class="card-body text-dark">
-                  
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                 </div>
               </div>
               
                 </div>
         </section> 
+        </jobspage>
+        
     `,
     props:['component']
 }
@@ -239,7 +258,7 @@ var app = new Vue({
         'settings' : settings,
         'jobDetails' : jobDetails,
         'mapPage' : mapPage,
-        'eventDetails' : eventDetails
+        'eventDetails' : eventDetails,
     },
     
     methods:{
@@ -297,7 +316,7 @@ var app = new Vue({
             this.location = localStorage.location;
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-            this.currentJobs = response.data
+            this.currentJobs = response.data.data
         })
     },
     watch:{
