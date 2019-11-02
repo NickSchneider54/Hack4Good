@@ -1,7 +1,3 @@
-//window.addEventListener("load", getJobs);
-
-//var aryCurrentJobs = getJobs();
-
 
 function job(title, company, description, location){
     this.title = title,
@@ -70,30 +66,6 @@ Vue.component('jobspage', {
     `
 })
 
-/* <jobspage 
-        v-for="currentJob in currentJobs"
-        v-bind:currentjob="currentJob"
-        v-bind:key="currentJob.id"
-        >
-                </jobspage> */
-
-
-var jobsPage = {
-    template: 
-    `
-        <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
-                <div class="card-header"></div>
-                <div class="card-body text-dark">
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-            </div>
-        </section> 
-
-        
-    `,
-    props:['component']
-}
 
 var alertsPage = {
     template:
@@ -309,8 +281,7 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                //this.component('jobsPage');
-                
+                                
             }          
        },
        setLocation: function(frmLocation){
@@ -344,20 +315,6 @@ var app = new Vue({
     }
 });
 
-//get JOBS
-
-// function getJobs() {
-//     var aryJobs = [];
-//     var aryTravelInfo = [];
-//     $.ajax({url: "https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf", success: (result) => {
-//         result.data.forEach((element) => {
-                     
-//         });
-        
-//     }});    
-//     return aryJobs;    
-// }
-
 function getTravelInfo(element){ 
     var aryTravelTime = [];      
     $.ajax({url: "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&travel_mode=driving|walking|transit&origins=localStorage.location.data&key=AIzaSyB5-OvoUmDb6KkRLnoh7fHQ7Ptg21PyDIQ", success: (result) =>{
@@ -370,6 +327,7 @@ function getTravelInfo(element){
         
 }
 
+<<<<<<< Updated upstream
 function getDistance(origin, destinationsLat, destinationsLong)
   {
      //Find the distance
@@ -395,6 +353,11 @@ function getDistance(origin, destinationsLat, destinationsLong)
   }
 
 getDistance(getLocation(), 37.1436541, -93.2916513);
+=======
+function getLocation(){         
+    navigator.geolocation.getCurrentPosition(locationFound);
+}
+>>>>>>> Stashed changes
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound(lat, lng));
