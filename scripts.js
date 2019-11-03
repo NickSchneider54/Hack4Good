@@ -393,7 +393,8 @@ function convertLatLng(lat, lng){
             }
         }
         
-    });            
+    });  
+    app.component('jobsPage');          
 }
 
-//app.component('jobsPage')
+
