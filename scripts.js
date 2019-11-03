@@ -236,8 +236,8 @@ var app = new Vue({
         favorites: [],
         currentJobs: [],
         trvlConstraints: [],
-        test: "test",
         currentComponent: 'landingPage',
+        currentEvents: []
         },
     components:{
         'landingPage' : landingPage,
@@ -317,6 +317,9 @@ var app = new Vue({
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
             this.currentJobs = response.data.data
+        }),
+        axios.get('https://jobs.api.sgf.dev/api/event?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
+            this.currentEvents = response.data.data
         })
     },
     watch:{
@@ -352,8 +355,9 @@ function getDistance(originLat, originLong, destinationsLat, destinationsLong)
             console.log('Error:', status);
         } else {
             console.log(response);
-            // response.rows[0].elements[0].distance.text;
-            // response.rows[0].elements[0].duration.text;
+            var distance = response.rows[0].elements[0].distance.text;
+            var duration = response.rows[0].elements[0].duration.text;
+            var distanceFromOrigin = [distance, duration];
         }
     });
   }
@@ -413,18 +417,21 @@ function population(aryOfJobs) {
          `
             <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${i} </div>
+                    <div class="card-header">${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
-                    <p class="card-text">${i}</p>
-                        getDistance(.lat, this.lat, currentjob.locations)</p>
+                    <p class="card-text">${aryOfJobs[i].employer.name}</p>
+                       </p>
                     </div>
                 </div>
             </section>
         `
     }
     console.log(aryOfJobs)
-    console.log(jobCards);
     return jobCards;
 }
 
+//getDistance(localStorage.getItem(app.lat), localStorage.getItem(app.lng), app.currentJobs.locations[0].lat, app.currentJobs.locations.data[0].lng)
 
+setTimeout(function() {
+    console.log(app.currentEvents);
+}, 10000)
