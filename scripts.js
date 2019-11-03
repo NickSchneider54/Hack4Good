@@ -16,10 +16,18 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
+<<<<<<< HEAD
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
             <button @click="component('settings')" class="btn btn-primary">Settings</button>  
         </section>
+=======
+        <h2>Jobs Near You</h2>
+        
+        ${ population(this.currentJobs)   }
+        
+      
+>>>>>>> master
     `,
     props:['component']
 }
@@ -232,6 +240,7 @@ var app = new Vue({
         favorites: [],
         currentJobs: [],
         trvlConstraints: [],
+        test: "test",
         currentComponent: 'landingPage',
         },
     components:{
@@ -293,6 +302,7 @@ var app = new Vue({
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
+<<<<<<< HEAD
             console.log(this.location);      
        }
     },
@@ -314,6 +324,13 @@ var app = new Vue({
         console.log(aryOfJobs)
         return jobCards;
     },
+=======
+            console.log(this.location);
+
+       }       
+
+       },
+>>>>>>> master
     mounted(){
         var newLocation;
         var newLat;
@@ -407,5 +424,28 @@ function addConstraint(constraint){
 function filterJobPosts(aryConstraints){
 
 }
+
+
+function population(aryOfJobs) {
+    var jobCards = ""
+    for (var i = 0; i < 10; i++) {
+        jobCards += `
+            <section id="jobsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">${ [i] } </div>
+                    <div class="card-body text-dark">
+                    <p class="card-text">${ [i]}</p>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        `
+    }
+    var seeMe = "test"
+    return seeMe;
+    //console.log(jobCards);
+    
+}
+
 
 
