@@ -1,0 +1,219 @@
+.alertMsg{
+    color: red;
+}
+
+.navbar .btn{
+    display: inline-block !important;
+    color: white;
+    margin: 3px;
+}
+
+#logoView {
+    margin-top: 20vh;
+    height: 75%;
+    width: 100%;
+    margin-bottom: 15vh;
+}
+
+#logoView img {
+    height: 100%;
+    width: 100%;
+}
+
+#splashContrast{
+    background-color: rgba(117, 192, 235, .4);
+    margin-top: 10vh;
+    min-height: 40vh;
+}
+
+#landing-btn{
+    width: 80%;
+    margin: auto !important;
+    margin-top: 0;
+    height: 4em !important;
+    background-color: #4979ad;
+    color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    outline: none !important;
+    border: none !important;
+    font-weight: 400;
+    font-size: 1.2em;
+}
+
+#currentLocation, #useAddress {
+    width: 85%;
+    margin: auto !important;
+    margin-top: 1em !important;
+    margin-bottom: 1em !important;
+}
+
+#divider span {
+    margin: auto;
+}
+
+#address, #city, #zip {
+    width: 85%;
+}
+
+#alertsTab {
+    width: 90%;
+}
+
+#jobsTab, #eventsTab {
+    width: 50%;
+}
+
+#transportationTypes button {
+    width: 25%;
+}
+
+#fix-btn {
+    margin-top: .5rem;
+}
+
+#eventMap {
+    display: none;
+}
+
+.title {
+    text-align: center;
+}
+
+.card {
+    margin-top: 1em !important;
+}
+
+#topBanner {
+    text-align: center;
+}
+
+#searchBanner {
+    margin: auto;
+    margin-top: 1em;
+    width: 86%;
+}
+
+.custom-switch {
+    display: inline-block;
+    width: 100%;
+    border: 1px black solid;
+}
+
+.custom-switch h4 {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.switch {
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.hide-checkbox {
+      display: none;
+}
+
+.distance {
+    margin-top: 10px;
+}
+
+
+
+/////////////////////
+
+<section id="eventsPage" class="m-auto">
+            <h2 class="m-auto">Events</h2>
+            <div id="listOfEvents" class="m-auto"></div>
+        </section>
+    `,
+    props:['component']
+}
+
+var settings = {
+    template:
+    `
+        <section id="settings">
+            <div class="title">Search Settings</div>
+            <div class="row" id="searchSettings">
+                <div class="custom-control custom-switch">
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Walking</h4>
+                </div>
+                <div class="custom-control custom-switch">
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Biking</h4>
+                </div>
+                <div class="custom-control custom-switch">
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Bus</h4>
+                </div>
+                <div class="custom-control custom-switch">
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Driving</h4>
+                </div>
+            </div>
+            <input @click="component('locationPage')" class="btn btn-primary distance" type="button" value="Update Location">
+        </section>
