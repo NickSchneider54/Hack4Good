@@ -1,28 +1,26 @@
-
+var aryDistAndDur = [];
 
 var settings = {
 	"async": true,
-	"crossDomain": true,
-	"url": "https://jobsapi.p.rapidapi.com/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf",
-	"method": "GET",
-	"headers": {
+    "crossDomain": true,
+    "method": "GET",
+    "url": "https://jobsapi.p.rapidapi.com/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf",
+    "headers": {
 		"x-rapidapi-host": "jobsapi.p.rapidapi.com",
 		"x-rapidapi-key": "28d8a0b743msh393a5332b3f8a85p1c181ejsn30b16c88afc5"
 	}
+	
 }
 
 $.ajax(settings).done(function (response) {
     app.currentJobs = response.data;
     temp = response.data;
     console.log(temp[0].locations.data[0].lat);
-    var aryJobListings = []
-    var jobLocation = [];
-
+    var aryJobListings = [];
     for(var i = 0; i < temp.length; i++){
-        jobLocation = getDistance(temp[i].locations.data[0].lat, temp[i].locations.data[0].lng);
-        console.log(jobLocation);
+        getDistance(temp[i].locations.data[0].lat, temp[i].locations.data[0].lng);
         aryJobListings.push(new job(temp[i].title, temp[i].employer.name, temp[i].description,
-            temp[i].locations.data[0].lat, temp[i].locations.data[0].lng, jobLocation[0], jobLocation[1]));
+            temp[i].locations.data[0].lat, temp[i].locations.data[0].lng, aryDistAndDur[0], aryDistAndDur[1]));
         console.log(aryJobListings[i]);
     }
 });
@@ -80,20 +78,24 @@ var locationPage = {
                 <button onclick="getLocation()" class="btn btn-primary">Use Current Location</button>
             </div>
             <div id="divider">
-                <i class="line"></i><span id="or">OR</span><i class="line"></i>
+                <small id="or">OR</small>
             </div>
             
             <div id="locationForm">                
                 <form action="component(jobsPage)" id="addressForm">
-                    <div id="alertAddress" class="alertMsg"></div>
-                    Street Address<br>
+
+                    <label for="address">Street Address</label>
+                    <div id="alertAddress" class="alertMsg"></div>                    
                     <input type="text" id="address" name="address">
-                    <div id="alertCity" class="alertMsg"></div>
-                    City<br>
+
+                    <label for="city">City</label>
+                    <div id="alertCity" class="alertMsg"></div>                    
                     <input type="text" id="city" name="city">
-                    <div id="alertZip" class="alertMsg"></div>
-                    Postal Code<br>
+
+                    <label for="zip">Postal Code</label>
+                    <div id="alertZip" class="alertMsg"></div>                    
                     <input type="text" id="zip" name="zip"><br><br>
+
                     <button onclick="return app.formValidation(this.form)" class="btn btn-primary btn-block" name="submit" type="button" id="useAddress">Use This Address</button>
                 </form>
             </div>
@@ -160,36 +162,37 @@ var settings = {
     `
         <section id="settings">
             <div class="title">Search Settings</div>
-            <div>
-                <label for="educationLvl">Education Level</label>
-                <select id="educationLvl"></select>
-            </div>
-            <div>
-                <label id="jobType">Job Type</label>
-                <select id="jobType"></select>
-            </div>
             <div class="row" id="searchSettings">
-                <div class="col-sm-8>
-                    <p>Test</p>
+                <div class="custom-control custom-switch">
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Walking</h4>
                 </div>
                 <div class="custom-control custom-switch">
-                    <label class="custom-control-label" for="customSwitch1">Walking Distance</label>  
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="walk" onclick="addConstraint(this)">                                                         
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Biking</h4>
                 </div>
                 <div class="custom-control custom-switch">
-                    <label class="custom-control-label" for="customSwitch2">Biking Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch2" name="biking" onclick="addConstraint(this)">                    
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Bus</h4>
                 </div>
                 <div class="custom-control custom-switch">
-                    <label class="custom-control-label" for="customSwitch3">Busing Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch3" name="busing" onclick="addConstraint(this)">                    
-                </div>
-                <div class="custom-control custom-switch">
-                    <label class="custom-control-label" for="customSwitch4">Driving Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch4" name="driving" onclick="addConstraint(this)">                    
+                    <label classs="switch">
+                        <input type="checkbox" class="hide-checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <h4>Driving</h4>
                 </div>
             </div>
-            <input @click="component('locationPage')" class="btn btn-primary" type="button" value="Update Location">
+            <input @click="component('locationPage')" class="btn btn-primary distance" type="button" value="Update Location">
         </section>
     `,
     props:['component']
@@ -370,7 +373,7 @@ var app = new Vue({
 
 function getDistance(destinationsLat, destinationsLong){
      var distanceService = new google.maps.DistanceMatrixService();
-     var distanceFromStartToFinish = distanceService.getDistanceMatrix({
+     var distanceFromOrigin = distanceService.getDistanceMatrix({
         origins: [{lat: parseFloat(localStorage.getItem('lat')), lng: parseFloat(localStorage.getItem('lng'))}],
         destinations: [{lat: parseFloat(destinationsLat), lng: parseFloat(destinationsLong)}],
         travelMode: google.maps.TravelMode.WALKING,
@@ -383,14 +386,17 @@ function getDistance(destinationsLat, destinationsLong){
         if (status !== google.maps.DistanceMatrixStatus.OK) {
             console.log('Error:', status);
         } else {
-            console.log(response);
             var distance = response.rows[0].elements[0].distance.text;
             var duration = response.rows[0].elements[0].duration.text;
-            var distanceFromOrigin = [distance, duration];
-            console.log(distanceFromOrigin)
-            return distanceFromOrigin;
+            distanceFromOrigin = [distance, duration];
+            stfuSteve(distanceFromOrigin);          
         }
     });
+}
+
+function stfuSteve(distanceFromOrigin){
+    aryDistAndDur = distanceFromOrigin;
+    console.log(aryDistAndDur);
 }
 
 function getLocation(){         
@@ -417,7 +423,8 @@ function convertLatLng(lat, lng){
         }
         
     });  
-    app.component('jobsPage');        
+    app.component('jobsPage'); 
+    population(app.currentJobs);
 }
 
 function population(aryOfJobs) {

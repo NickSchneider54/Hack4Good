@@ -45,32 +45,55 @@
     background-color: rgba(117, 192, 235, .08);
     min-height: 100vh;
     padding: 20px;
+    width: 100%;
 }
 
 #locationHeader{
     text-align: center;
+    margin-bottom: 25px;
 }
 
 #currentLocation{
+    width: 100%;
+}
+
+#currentLocation  button{
     display: block;
     margin: auto !important;
+}
+
+#locationForm{
+    width: 100%;
+    margin: auto;
 }
 
 #addressForm{
-    width: 90%;
+    width: 100%;
     margin: auto !important;
+}
+
+#addressForm input {
+    width: 100%;
+}
+
+label{
     display: block;
 }
 
-#currentLocation, #useAddress {
+#useAddress {
     width: 85%;
     margin: auto !important;
-    margin-top: 1em !important;
-    margin-bottom: 1em !important;
+    margin-top: 20px !important;
 }
 
-#divider span {
-    margin: auto;
+#divider{
+    width: 100%;
+    text-align: center;
+    margin: 20px auto;
+}
+
+#divider #or{
+    text-align: center;
 }
 
 #address, #city, #zip {
@@ -113,4 +136,78 @@
     margin: auto;
     margin-top: 1em;
     width: 86%;
+}
+
+.custom-switch {
+    display: inline-block;
+    width: 100%;
+    border: 1px black solid;
+}
+
+.custom-switch h4 {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.switch {
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.slider {
+    position: absolute;
+    cursor: pointer;
+    width: 60px;
+    height: 34px;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+  
+input:checked + .slider {
+    background-color: #2196F3;
+}
+  
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+  
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.hide-checkbox {
+      display: none;
+}
+
+.distance {
+    margin-top: 10px;
 }
