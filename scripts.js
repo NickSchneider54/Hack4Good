@@ -1,6 +1,3 @@
-setInterval()
-
-
 var settings = {
 	"async": true,
 	"crossDomain": true,
@@ -11,9 +8,13 @@ var settings = {
 		"x-rapidapi-key": "28d8a0b743msh393a5332b3f8a85p1c181ejsn30b16c88afc5"
 	}
 }
-
+var temp = [];
 $.ajax(settings).done(function (response) {
-    temp = response.data;
+    response.data.forEach((element, index) => {
+        temp[index] = element;
+    })
+
+    //temp = response.data;
     console.log(temp[0].locations.data[0].lat);
     var aryJobListings = []
     var jobLocation = [];
@@ -47,6 +48,15 @@ var job = function(title, company, description, lat, lng, distance, duration){
 //         console.log(aryJobListings[i]);
 //     }    
 // }
+
+var populateJobs = setInterval(function() {
+    if (temp.length > 0) {
+        clearInterval(populateJobs);
+        document.getElementById('jobListings').innerHTML = population(temp);
+        
+    }
+}, 1000)
+
 
 var landingPage = {
     template:
@@ -438,9 +448,9 @@ function population(aryOfJobs) {
          `
             <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${aryOfJobs[i].title} </div>
+                    <div class="card-header"><h6 class="define-4">Title: </h6>${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
-                    <p class="card-text">${aryOfJobs[i].employer.name}</p>
+                    <p class="card-text"><h6 class="define-4">Company: </h6>${aryOfJobs[i].employer.name}</p>
                     </div>
                 </div>
             </section>
