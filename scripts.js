@@ -418,7 +418,6 @@ function population(aryOfJobs) {
                     <div class="card-header">${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
                     <p class="card-text">${aryOfJobs[i].employer.name}</p>
-                       </p>
                     </div>
                 </div>
             </section>
@@ -441,10 +440,10 @@ function populateEvents(aryOfEvents) {
         `
             <section id="eventsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${i}</div>
+                    <div class="card-header">${aryOfEvents[i].title}</div>
                     <div class="card-body text-dark">
-                        <p class="card-text">${i}</p>
-                        getDistance(.lat, this.lat, currentevent.location)</p>
+                        <p class="card-text">${aryOfEvents[i].description}</p>
+                        <p class="card-text" id="event-date">${aryOfEvents[i].date_begin}</p>
                     </div>
                 </div>
             </section>
