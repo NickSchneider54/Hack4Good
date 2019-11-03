@@ -1,5 +1,5 @@
 setTimeout(function() {    
-    document.getElementById('listOfShit').innerHTML = population(app.currentJobs);
+    document.getElementById('jobListings').innerHTML = population(app.currentJobs);
 }, 10000)
 
 setTimeout(function() {
@@ -24,7 +24,8 @@ var jobsPage = {
     `
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
-            <div id="listOfShit">
+            <button class="btn btn-primary" @click="component('settings')">Settings</button>
+            <div id="jobListings">
 
             </div>   
         </section>
@@ -147,7 +148,7 @@ var settings = {
                     <input type="checkbox" class="custom-control-input" id="customSwitch4" name="driving" onclick="addConstraint(this)">                    
                 </div>
             </div>
-            <input @click="component('locationPage')" class="btn" type="button" value="location">
+            <input @click="component('locationPage')" class="btn btn-primary" type="button" value="Update Location">
         </section>
     `,
     props:['component']
@@ -388,7 +389,10 @@ function convertLatLng(lat, lng){
     app.component('jobsPage');        
 }
 
+
+
 function addConstraint(constraint){
+    constraint.checked;
     var aryConstraints = [];
     aryConstraints.push(constraint.name);
     console.log(aryConstraints);
