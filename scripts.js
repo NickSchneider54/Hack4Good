@@ -6,6 +6,8 @@ setTimeout(function() {
     var eventLists = populateEvents(app.currentEvents);
 }, 11000);
 
+
+
 var landingPage = {
     template:
     `
@@ -290,14 +292,12 @@ var app = new Vue({
                 return isValid; 
             }   
             else{
-                this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                
+                this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);                
                                 
             }          
        },
        setLocation: function(frmLocation){
-            this.location = frmLocation;
-            console.log(this.location);      
+            this.location = frmLocation;   
        }
     },
        
@@ -316,6 +316,7 @@ var app = new Vue({
         }
         axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
             this.currentJobs = response.data.data
+            buildObject(this.currentJobs);
         }),
         axios.get('https://jobs.api.sgf.dev/api/event?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
             this.currentEvents = response.data.data
@@ -335,8 +336,7 @@ var app = new Vue({
     }
 });
 
-function getDistance(originLat, originLong, destinationsLat, destinationsLong)
-  {
+function getDistance(destinationsLat, destinationsLong){
       
      //Find the distance
      var distanceService = new google.maps.DistanceMatrixService();
@@ -356,10 +356,10 @@ function getDistance(originLat, originLong, destinationsLat, destinationsLong)
             console.log(response);
             var distance = response.rows[0].elements[0].distance.text;
             var duration = response.rows[0].elements[0].duration.text;
-            var distanceFromOrigin = [distance, duration];
+            return distanceFromOrigin = [distance, duration];
         }
     });
-  }
+}
 
 
 function getLocation(){         
@@ -404,7 +404,6 @@ function population(aryOfJobs) {
             </section>
         `
     }
-    console.log(aryOfJobs)
     return jobCards;
 }
 
@@ -423,13 +422,8 @@ function populateEvents(aryOfEvents) {
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                     <div class="card-header">${aryOfEvents[i].title}</div>
                     <div class="card-body text-dark">
-<<<<<<< HEAD
-                        <p class="card-text">${i}</p>
-                        getDistance(.lat, this.lat, currentevent.location)
-=======
                         <p class="card-text">${aryOfEvents[i].description}</p>
                         <p class="card-text" id="event-date">${aryOfEvents[i].date_begin}</p>
->>>>>>> master
                     </div>
                 </div>
             </section>
@@ -464,18 +458,35 @@ function addConstraint(constraint){
     constraint.checked;
     var aryConstraints = [];
     aryConstraints.push(constraint.name);
-    console.log(aryConstraints);
 }
 
-function filterJobPosts(aryConstraints, currentJobs){
-    var aryFiltered = [];
+// function filterJobPosts(aryConstraints, currentJobs){
+//     var aryFiltered = [];
+//     for(var i = 0; i < app.currentJobs.length; i++){
+//         if(aryConstraints[i] == app.){
+
+//         }
+//     }    
+//     return jobCards;      
+// }
+
+var job = function(title, company, description, lat, lng, distance, duration){
+    this.title = title;
+    this.company = company;
+    this.description = description;
+    this.lat = lat;
+    this.lng = lng;
+    this.distance = distance;
+    this.duration = duration;
+}
+
+function buildObject(currentJobs){
+    var jobLocation = [];
     for(var i = 0; i < app.currentJobs.length; i++){
-        if(aryConstraints[j] == app.currentJobs){
-            aryFiltered.push(app.currentJobs);
-            for(var j = 0; j < 4; j++){
-                
-            }
-        }
+        jobLocation[0] = getDistance(app.currentJobs.locations.data[0].lat, app.currentJobs.locations.data[0].lng).splice(0,1);
+        jobLocaton[1] = getDistance(app.currentJobs.locations.data[0].lat, app.currentJobs.locations.data[0].lng).splice(1,1);
+        aryJobListings.push(new job(app.currentJobs[i].title, app.currentJobs[i].employer.name, app.currentJobs[i].description,
+            app.currentJobs[i].locations.data[0].lat, app.currentJobs.locations.data[0].lng, jobLocation[0], jobLocation[1]));
+        console.log(aryJobListings[i]);
     }    
-    return jobCards;      
 }
