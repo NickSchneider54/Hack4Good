@@ -2,6 +2,10 @@ setTimeout(function() {
     document.getElementById('listOfShit').innerHTML = population(app.currentJobs);
 }, 10000)
 
+setTimeout(function() {
+    document.getElementById('listOfEvents').innerHTML = populateEvents(app.currentEvents);
+}, 10000)
+
 var landingPage = {
     template:
     `
@@ -102,15 +106,8 @@ var eventsPage = {
     template:
     `
         <section id="eventsPage">
-            <div class="title">Events</div>
-            <div id="eventListings">
-                <div class="card border-dark mb-3 m-auto" style="max-width: 20rem;">
-                    <div class="card-header"></div>
-                    <div class="card-body text-dark">
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>  
-            </div>
+            <h2>Events</h2>
+            <div id="listOfEvents"></div>
         </section>
     `,
     props:['component']
@@ -235,6 +232,7 @@ var app = new Vue({
         lng: "",
         favorites: [],
         currentJobs: [],
+        currentEvents: [],
         trvlConstraints: [],
         currentComponent: 'landingPage',
         currentEvents: []
@@ -435,3 +433,24 @@ function population(aryOfJobs) {
 setTimeout(function() {
     console.log(app.currentEvents);
 }, 10000)
+
+function populateEvents(aryOfEvents) {
+    var eventCards = ""
+    for (var i = 0; i<10; i++) {
+        eventCards +=
+        `
+            <section id="eventsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">${i}</div>
+                    <div class="card-body text-dark">
+                        <p class="card-text">${i}</p>
+                        getDistance(.lat, this.lat, currentevent.location)</p>
+                    </div>
+                </div>
+            </section>
+        `
+    }
+    console.log(aryOfEvents)
+    console.log(eventCards);
+    return eventCards;
+}
