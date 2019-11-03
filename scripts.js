@@ -18,7 +18,15 @@ var jobsPage = {
     `
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
-            <button @click="component('settings')" class="btn btn-primary">Settings</button>  
+        
+            ${
+            setTimeout(function() {
+                console.log(population(app.currentJobs))
+            }, 15000)
+        }
+            
+            
+
         </section>
     `,
     props:['component']
@@ -294,26 +302,9 @@ var app = new Vue({
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
-            console.log(this.location);      
-       }
-    },
-       population: function(aryOfJobs) {
-        var jobCards = ""
-        for (var i = 0; i < 10; i++) {
-            jobCards += `
-                <section id="jobsPage">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">${ [i] } </div>
-                        <div class="card-body text-dark">
-                        <p class="card-text">${ [i]}</p>
-                            getDistance(.lat, this.lat, currentjob.locations)</p>
-                        </div>
-                    </div>
-                </section>
-            `
-        }
-        console.log(aryOfJobs)
-        return jobCards;
+            console.log(this.location);
+
+       } 
     },
     mounted(){
         var newLocation;
@@ -416,20 +407,23 @@ function population(aryOfJobs) {
         jobCards += `
             <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${ [i] } </div>
+                    <div class="card-header">${ aryOfJobs[0].title } </div>
                     <div class="card-body text-dark">
-                    <p class="card-text">${ [i]}</p>
+                    <p class="card-text">${ aryOfJobs[i].employer.name }</p>
                         </p>
                     </div>
                 </div>
             </section>
         `
+       // console.log(jobCards)
     }
-    var seeMe = "test"
-    return seeMe;
+    //console.log(aryOfJobs)
+    return jobCards;
     //console.log(jobCards);
     
 }
 
 
-
+setTimeout(function() {
+    console.log(population(app.currentJobs))
+}, 10000)
