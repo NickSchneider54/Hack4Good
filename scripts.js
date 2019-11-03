@@ -16,7 +16,11 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
-        <h2>Jobs Near You</h2>   
+        <h2>Jobs Near You</h2>
+        
+        ${ population(this.currentJobs)   }
+        
+      
     `,
     props:['component']
 }
@@ -229,6 +233,7 @@ var app = new Vue({
         favorites: [],
         currentJobs: [],
         trvlConstraints: [],
+        test: "test",
         currentComponent: 'landingPage',
         },
     components:{
@@ -245,24 +250,6 @@ var app = new Vue({
     },
     
     methods:{
-        population: function(aryOfJobs) {
-            var jobCards = ""
-            for (var i = 0; i < 10; i++) {
-                jobCards += `
-                    <section id="jobsPage">
-                        <div class="card border-dark mb-3" style="max-width: 20rem;">
-                            <div class="card-header">${ [i] } </div>
-                            <div class="card-body text-dark">
-                            <p class="card-text">${ [i]}</p>
-                                getDistance(.lat, this.lat, currentjob.locations)</p>
-                            </div>
-                        </div>
-                    </section>
-                `
-            }
-            console.log(aryOfJobs)
-            return jobCards;
-        },
        component: function(component){
            this.currentComponent = component;
        },
@@ -396,5 +383,28 @@ function convertLatLng(lat, lng){
     });  
     app.component('jobsPage');          
 }
+
+
+function population(aryOfJobs) {
+    var jobCards = ""
+    for (var i = 0; i < 10; i++) {
+        jobCards += `
+            <section id="jobsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">${ [i] } </div>
+                    <div class="card-body text-dark">
+                    <p class="card-text">${ [i]}</p>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        `
+    }
+    var seeMe = "test"
+    return seeMe;
+    //console.log(jobCards);
+    
+}
+
 
 
