@@ -1,4 +1,3 @@
-setInterval()
 
 
 var settings = {
@@ -13,17 +12,18 @@ var settings = {
 }
 
 $.ajax(settings).done(function (response) {
-    temp = response.data;
+    var temp = response.data;
     console.log(temp[0].locations.data[0].lat);
     var aryJobListings = []
     var jobLocation = [];
+
     for(var i = 0; i < temp.length; i++){
         jobLocation = getDistance(temp[i].locations.data[0].lat, temp[i].locations.data[0].lng);
         console.log(jobLocation);
         aryJobListings.push(new job(temp[i].title, temp[i].employer.name, temp[i].description,
             temp[i].locations.data[0].lat, temp[i].locations.data[0].lng, jobLocation[0], jobLocation[1]));
         console.log(aryJobListings[i]);
-        }
+    }
 });
 
 var job = function(title, company, description, lat, lng, distance, duration){
@@ -36,17 +36,7 @@ var job = function(title, company, description, lat, lng, distance, duration){
     this.duration = duration;
 }
 
-// function buildObject(temp){
-//     var aryJobListings = []
-//     var jobLocation = [];
-//     for(var i = 0; i < temp.length; i++){
-//         jobLocation = getDistance(temp[0].locations.data[0].lat, temp[0].locations.data[0].lng);
-//         console.log(jobLocation);
-//         aryJobListings.push(new job(temp[i].title, temp[i].employer.name, temp[i].description,
-//             temp.locations.data[0].lat, temp.locations.data[0].lng, jobLocation[0], jobLocation[1]));
-//         console.log(aryJobListings[i]);
-//     }    
-// }
+setTimeout(20000);
 
 var landingPage = {
     template:
@@ -353,15 +343,9 @@ var app = new Vue({
         }
         if(localStorage.lng){
             this.lng = localStorage.lng;
-        }
-        // axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-        //     this.currentJobs = response.data.data
-        //     buildObject(this.currentJobs);
-        // }),
-        // axios.get('https://jobs.api.sgf.dev/api/event?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-        //     this.currentEvents = response.data.data
-        // })
+        }       
     },
+
     watch:{
         location(newLocation){
             localStorage.location = newLocation;
@@ -402,7 +386,6 @@ function getDistance(destinationsLat, destinationsLong){
         }
     });
 }
-
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
@@ -449,10 +432,6 @@ function population(aryOfJobs) {
     return jobCards;
 }
 
-//getDistance(localStorage.getItem(app.lat), localStorage.getItem(app.lng), app.currentJobs.locations[0].lat, app.currentJobs.locations.data[0].lng)
-
-
-
 function populateEvents(aryOfEvents) {
     var eventCards = ""
     for (var i = 0; i<10; i++) {
@@ -468,8 +447,7 @@ function populateEvents(aryOfEvents) {
                 </div>
             </section>
         `
-    }
-  
+    }  
     return eventCards;
 }
 
@@ -493,19 +471,4 @@ function filterJobPosts(aryConstraints, currentJobs){
     return jobCards;     
 }
 
-function addConstraint(constraint){
-    constraint.checked;
-    var aryConstraints = [];
-    aryConstraints.push(constraint.name);
-}
-
-// function filterJobPosts(aryConstraints, currentJobs){
-//     var aryFiltered = [];
-//     for(var i = 0; i < app.currentJobs.length; i++){
-//         if(aryConstraints[i] == app.){
-
-//         }
-//     }    
-//     return jobCards;      
-// }
 
