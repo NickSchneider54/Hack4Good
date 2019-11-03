@@ -18,6 +18,7 @@ var jobsPage = {
     `
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
+<<<<<<< Updated upstream
         
             ${
             setTimeout(function() {
@@ -27,6 +28,9 @@ var jobsPage = {
             
             
 
+=======
+            <button @click="component('settings')" class="btn btn-primary">Settings</button>  
+>>>>>>> Stashed changes
         </section>
     `,
     props:['component']
@@ -147,7 +151,7 @@ var settings = {
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch3">Busing Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch3 name="busing" onclick="addConstraint(this)">                    
+                    <input type="checkbox" class="custom-control-input" id="customSwitch3" name="busing" onclick="addConstraint(this)">                    
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch4">Driving Distance</label>
@@ -302,9 +306,32 @@ var app = new Vue({
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
+<<<<<<< Updated upstream
             console.log(this.location);
 
        } 
+=======
+            console.log(this.location);      
+       }
+    },
+       population: function(aryOfJobs) {
+        var jobCards = ""
+        for (var i = 0; i < 10; i++) {
+            jobCards += `
+                <section id="jobsPage">
+                    <div class="card border-dark mb-3" style="max-width: 20rem;">
+                        <div class="card-header">${ [i] } </div>
+                        <div class="card-body text-dark">
+                        <p class="card-text">${ [i]}</p>
+                            getDistance(.lat, this.lat, currentjob.locations)</p>
+                        </div>
+                    </div>
+                </section>
+            `
+        }
+        console.log(aryOfJobs)
+        return jobCards;
+>>>>>>> Stashed changes
     },
     mounted(){
         var newLocation;
@@ -392,15 +419,18 @@ function convertLatLng(lat, lng){
 
 function addConstraint(constraint){
     var aryConstraints = [];
-    aryConstraints.push(constraint.name.value);
+    aryConstraints.push(constraint.name);
     console.log(aryConstraints);
 }
 
-function filterJobPosts(aryConstraints){
+function filterJobPosts(aryConstraints, currentJobs){
+    var aryFiltered = [];
+    for(var i = 0; i < app.currentJobs.length; i++){
+        if(aryConstraints[j] == app.currentJobs){
+            aryFiltered.push(app.currentJobs);
+            for(var j = 0; j < 4; j++){
 
-}
-
-
+<<<<<<< Updated upstream
 function population(aryOfJobs) {
     var jobCards = ""
     for (var i = 0; i < 10; i++) {
@@ -427,3 +457,10 @@ function population(aryOfJobs) {
 setTimeout(function() {
     console.log(population(app.currentJobs))
 }, 10000)
+=======
+            }
+        }
+    }
+}
+
+>>>>>>> Stashed changes
