@@ -1,3 +1,5 @@
+var aryDistAndDur = [];
+
 var settings = {
 	"async": true,
 	"crossDomain": true,
@@ -407,7 +409,7 @@ function getDistance(destinationsLat, destinationsLong){
 }
 
 function passCoords(distanceFromOrigin){
-    aryDistAndDur = distanceFromOrigin;
+    aryDistAndDurn = distanceFromOrigin;
     console.log(aryDistAndDur);
 }
 
@@ -448,6 +450,7 @@ function convertLatLng(lat, lng){
 function population(aryOfJobs) {
     var jobCards = ""
     for (var i = 0; i < 10; i++) {
+        getDistance(aryOfJobs[i].locations.data[0].lat, aryOfJobs[i].locations.data[0].lng)
         jobCards +=
          `
             <section id="jobsPage">
@@ -458,7 +461,12 @@ function population(aryOfJobs) {
                     </div>
                     <div class="card-footer>
                         <div class="row">
+                            <p>Distance & Duration</p>
+                            <div class="col-sm-6">                                
+                                Duration: ${aryDistAndDur[0]}
+                            </div>
                             <div class="col-sm-6">
+                                Distance: ${aryDistAndDur[1]}
                             </div>
                         </div>
                     </div>
@@ -474,7 +482,7 @@ function population(aryOfJobs) {
 
 
 function populateEvents(aryOfEvents) {
-    var eventCards = ""
+    var eventCards = ""    
     for (var i = 0; i<10; i++) {
         eventCards +=
         `
