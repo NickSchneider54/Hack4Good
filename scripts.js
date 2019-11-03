@@ -1,10 +1,10 @@
 setTimeout(function() {    
-    document.getElementById('jobListings').innerHTML = population(app.currentJobs);
-}, 10000)
+    var jobLists = population(app.currentJobs);
+}, 10000);
 
 setTimeout(function() {
-    document.getElementById('listOfEvents').innerHTML = populateEvents(app.currentEvents);
-}, 10000)
+    var eventLists = populateEvents(app.currentEvents);
+}, 11000);
 
 var landingPage = {
     template:
@@ -389,29 +389,6 @@ function convertLatLng(lat, lng){
     app.component('jobsPage');        
 }
 
-
-
-function addConstraint(constraint){
-    constraint.checked;
-    var aryConstraints = [];
-    aryConstraints.push(constraint.name);
-    console.log(aryConstraints);
-}
-
-function filterJobPosts(aryConstraints, currentJobs){
-    var aryFiltered = [];
-    for(var i = 0; i < app.currentJobs.length; i++){
-        if(aryConstraints[j] == app.currentJobs){
-            aryFiltered.push(app.currentJobs);
-            for(var j = 0; j < 4; j++){
-
-            }
-        }
-    }    
-    return jobCards;  
-    
-}
-
 function population(aryOfJobs) {
     var jobCards = ""
     for (var i = 0; i < 10; i++) {
@@ -448,7 +425,7 @@ function populateEvents(aryOfEvents) {
                     <div class="card-header">${i}</div>
                     <div class="card-body text-dark">
                         <p class="card-text">${i}</p>
-                        getDistance(.lat, this.lat, currentevent.location)</p>
+                        getDistance(.lat, this.lat, currentevent.location)
                     </div>
                 </div>
             </section>
@@ -457,4 +434,44 @@ function populateEvents(aryOfEvents) {
     console.log(aryOfEvents)
     console.log(eventCards);
     return eventCards;
+}
+
+function addConstraint(constraint){
+    constraint.checked;
+    var aryConstraints = [];
+    aryConstraints.push(constraint.name);
+    console.log(aryConstraints);
+}
+
+function filterJobPosts(aryConstraints, currentJobs){
+    var aryFiltered = [];
+    for(var i = 0; i < app.currentJobs.length; i++){
+        if(aryConstraints[j] == app.currentJobs){
+            aryFiltered.push(app.currentJobs);
+            for(var j = 0; j < 4; j++){
+
+            }
+        }
+    }    
+    return jobCards;     
+}
+
+function addConstraint(constraint){
+    constraint.checked;
+    var aryConstraints = [];
+    aryConstraints.push(constraint.name);
+    console.log(aryConstraints);
+}
+
+function filterJobPosts(aryConstraints, currentJobs){
+    var aryFiltered = [];
+    for(var i = 0; i < app.currentJobs.length; i++){
+        if(aryConstraints[j] == app.currentJobs){
+            aryFiltered.push(app.currentJobs);
+            for(var j = 0; j < 4; j++){
+                
+            }
+        }
+    }    
+    return jobCards;      
 }
