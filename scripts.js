@@ -1,12 +1,52 @@
-setTimeout(function() {    
-    var jobLists = population(app.currentJobs);
-}, 10000);
-
-setTimeout(function() {
-    var eventLists = populateEvents(app.currentEvents);
-}, 11000);
+setInterval()
 
 
+var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://jobsapi.p.rapidapi.com/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "jobsapi.p.rapidapi.com",
+		"x-rapidapi-key": "28d8a0b743msh393a5332b3f8a85p1c181ejsn30b16c88afc5"
+	}
+}
+
+$.ajax(settings).done(function (response) {
+    temp = response.data;
+    console.log(temp[0].locations.data[0].lat);
+    var aryJobListings = []
+    var jobLocation = [];
+    for(var i = 0; i < temp.length; i++){
+        jobLocation = getDistance(temp[i].locations.data[0].lat, temp[i].locations.data[0].lng);
+        console.log(jobLocation);
+        aryJobListings.push(new job(temp[i].title, temp[i].employer.name, temp[i].description,
+            temp[i].locations.data[0].lat, temp[i].locations.data[0].lng, jobLocation[0], jobLocation[1]));
+        console.log(aryJobListings[i]);
+        }
+});
+
+var job = function(title, company, description, lat, lng, distance, duration){
+    this.title = title;
+    this.company = company;
+    this.description = description;
+    this.lat = lat;
+    this.lng = lng;
+    this.distance = distance;
+    this.duration = duration;
+}
+
+// function buildObject(temp){
+//     var aryJobListings = []
+//     var jobLocation = [];
+//     for(var i = 0; i < temp.length; i++){
+//         jobLocation = getDistance(temp[0].locations.data[0].lat, temp[0].locations.data[0].lng);
+//         console.log(jobLocation);
+//         aryJobListings.push(new job(temp[i].title, temp[i].employer.name, temp[i].description,
+//             temp.locations.data[0].lat, temp.locations.data[0].lng, jobLocation[0], jobLocation[1]));
+//         console.log(aryJobListings[i]);
+//     }    
+// }
 
 var landingPage = {
     template:
@@ -24,6 +64,7 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
+
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
             <button class="btn btn-primary" @click="component('settings')">Settings</button>
@@ -238,7 +279,6 @@ var app = new Vue({
         currentEvents: [],
         trvlConstraints: [],
         currentComponent: 'landingPage',
-        currentEvents: []
         },
     components:{
         'landingPage' : landingPage,
@@ -314,13 +354,13 @@ var app = new Vue({
         if(localStorage.lng){
             this.lng = localStorage.lng;
         }
-        axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-            this.currentJobs = response.data.data
-            buildObject(this.currentJobs);
-        }),
-        axios.get('https://jobs.api.sgf.dev/api/event?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
-            this.currentEvents = response.data.data
-        })
+        // axios.get('https://jobs.api.sgf.dev/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
+        //     this.currentJobs = response.data.data
+        //     buildObject(this.currentJobs);
+        // }),
+        // axios.get('https://jobs.api.sgf.dev/api/event?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf').then(response => {
+        //     this.currentEvents = response.data.data
+        // })
     },
     watch:{
         location(newLocation){
@@ -341,8 +381,8 @@ function getDistance(destinationsLat, destinationsLong){
      //Find the distance
      var distanceService = new google.maps.DistanceMatrixService();
      distanceService.getDistanceMatrix({
-        origins: [{lat: origin[0], lng: origin[1]}],
-        destinations: [{lat: destinationsLat, lng: destinationsLong}],
+        origins: [{lat: parseFloat(localStorage.getItem('lat')), lng: parseFloat(localStorage.getItem('lng'))}],
+        destinations: [{lat: parseFloat(destinationsLat), lng: parseFloat(destinationsLong)}],
         travelMode: google.maps.TravelMode.WALKING,
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         durationInTraffic: true,
@@ -356,7 +396,9 @@ function getDistance(destinationsLat, destinationsLong){
             console.log(response);
             var distance = response.rows[0].elements[0].distance.text;
             var duration = response.rows[0].elements[0].duration.text;
-            return distanceFromOrigin = [distance, duration];
+            var distanceFromOrigin = [distance, duration];
+            console.log(distanceFromOrigin)
+            return distanceFromOrigin;
         }
     });
 }
@@ -409,9 +451,7 @@ function population(aryOfJobs) {
 
 //getDistance(localStorage.getItem(app.lat), localStorage.getItem(app.lng), app.currentJobs.locations[0].lat, app.currentJobs.locations.data[0].lng)
 
-setTimeout(function() {
-    console.log(app.currentEvents);
-}, 10000)
+
 
 function populateEvents(aryOfEvents) {
     var eventCards = ""
@@ -429,8 +469,7 @@ function populateEvents(aryOfEvents) {
             </section>
         `
     }
-    console.log(aryOfEvents)
-    console.log(eventCards);
+  
     return eventCards;
 }
 
@@ -470,23 +509,3 @@ function addConstraint(constraint){
 //     return jobCards;      
 // }
 
-var job = function(title, company, description, lat, lng, distance, duration){
-    this.title = title;
-    this.company = company;
-    this.description = description;
-    this.lat = lat;
-    this.lng = lng;
-    this.distance = distance;
-    this.duration = duration;
-}
-
-function buildObject(currentJobs){
-    var jobLocation = [];
-    for(var i = 0; i < app.currentJobs.length; i++){
-        jobLocation[0] = getDistance(app.currentJobs.locations.data[0].lat, app.currentJobs.locations.data[0].lng).splice(0,1);
-        jobLocaton[1] = getDistance(app.currentJobs.locations.data[0].lat, app.currentJobs.locations.data[0].lng).splice(1,1);
-        aryJobListings.push(new job(app.currentJobs[i].title, app.currentJobs[i].employer.name, app.currentJobs[i].description,
-            app.currentJobs[i].locations.data[0].lat, app.currentJobs.locations.data[0].lng, jobLocation[0], jobLocation[1]));
-        console.log(aryJobListings[i]);
-    }    
-}
