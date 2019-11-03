@@ -49,13 +49,7 @@ var job = function(title, company, description, lat, lng, distance, duration){
 //     }    
 // }
 
-var populateJobs = setInterval(function() {
-    if (temp.length > 0) {
-        clearInterval(populateJobs);
-        document.getElementById('jobListings').innerHTML = population(temp);
-        
-    }
-}, 1000)
+
 
 
 var landingPage = {
@@ -441,7 +435,14 @@ function convertLatLng(lat, lng){
         }
         
     });  
-    app.component('jobsPage');        
+    app.component('jobsPage');   
+    //var jobsPopulate = "";
+    var loading = setInterval(function() {
+        if (temp.length > 0) {
+            clearInterval(loading);
+            document.getElementById('jobListings').innerHTML = population(temp);
+        }
+    }, 1000);     
 }
 
 function population(aryOfJobs) {
