@@ -16,18 +16,10 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
-<<<<<<< HEAD
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
             <button @click="component('settings')" class="btn btn-primary">Settings</button>  
         </section>
-=======
-        <h2>Jobs Near You</h2>
-        
-        ${ population(this.currentJobs)   }
-        
-      
->>>>>>> master
     `,
     props:['component']
 }
@@ -302,7 +294,6 @@ var app = new Vue({
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
-<<<<<<< HEAD
             console.log(this.location);      
        }
     },
@@ -324,13 +315,6 @@ var app = new Vue({
         console.log(aryOfJobs)
         return jobCards;
     },
-=======
-            console.log(this.location);
-
-       }       
-
-       },
->>>>>>> master
     mounted(){
         var newLocation;
         var newLat;
