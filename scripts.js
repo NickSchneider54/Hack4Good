@@ -21,8 +21,8 @@ var jobsPage = {
         
             ${
             setTimeout(function() {
-                console.log(population(app.currentJobs))
-            }, 15000)
+                population(app.currentJobs)
+            }, 10000)
         }
             
             
@@ -405,21 +405,19 @@ function population(aryOfJobs) {
     var jobCards = ""
     for (var i = 0; i < 10; i++) {
         jobCards += `
-            <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${ aryOfJobs[0].title } </div>
+                    <div class="card-header">${ aryOfJobs[i].title } </div>
                     <div class="card-body text-dark">
                     <p class="card-text">${ aryOfJobs[i].employer.name }</p>
                         </p>
                     </div>
                 </div>
-            </section>
         `
-       // console.log(jobCards)
+      
     }
-    //console.log(aryOfJobs)
+    
     return jobCards;
-    //console.log(jobCards);
+    
     
 }
 
