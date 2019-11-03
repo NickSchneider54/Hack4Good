@@ -245,6 +245,24 @@ var app = new Vue({
     },
     
     methods:{
+        population: function(aryOfJobs) {
+            var jobCards = ""
+            for (var i = 0; i < 10; i++) {
+                jobCards += `
+                    <section id="jobsPage">
+                        <div class="card border-dark mb-3" style="max-width: 20rem;">
+                            <div class="card-header">${ [i] } </div>
+                            <div class="card-body text-dark">
+                            <p class="card-text">${ [i]}</p>
+                                getDistance(.lat, this.lat, currentjob.locations)</p>
+                            </div>
+                        </div>
+                    </section>
+                `
+            }
+            console.log(aryOfJobs)
+            return jobCards;
+        },
        component: function(component){
            this.currentComponent = component;
        },
@@ -295,24 +313,6 @@ var app = new Vue({
        }       
 
        },
-       population: function(aryOfJobs) {
-        var jobCards = ""
-        for (var i = 0; i < 10; i++) {
-            jobCards += `
-                <section id="jobsPage">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">${ [i] } </div>
-                        <div class="card-body text-dark">
-                        <p class="card-text">${ [i]}</p>
-                            getDistance(.lat, this.lat, currentjob.locations)</p>
-                        </div>
-                    </div>
-                </section>
-            `
-        }
-        console.log(aryOfJobs)
-        return jobCards;
-    },
     mounted(){
         var newLocation;
         var newLat;
