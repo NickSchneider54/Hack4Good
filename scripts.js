@@ -1,5 +1,20 @@
+var settings = {
+	"async": true,
+	"crossDomain": true,
+	"url": "https://jobsapi.p.rapidapi.com/api/job?api_token=iyOSd0gsuR9TZIqWe9wAWuRbLai0HYCmLG3OrUFfFct1ePozfiCoZlOVKVfqfTMGung2IxC9LY2WGZUf",
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "jobsapi.p.rapidapi.com",
+		"x-rapidapi-key": "28d8a0b743msh393a5332b3f8a85p1c181ejsn30b16c88afc5"
+	}
+}
+var testJobs;
+$.ajax(settings).done(function (response) {
+	console.log(response.data[0].locations.data[0].lat);
+});
+
 setTimeout(function() {    
-    document.getElementById('jobListings').innerHTML = population(app.currentJobs);
+    document.getElementById('jobListings').innerHTML = testJobs;
 }, 10000)
 
 setTimeout(function() {
@@ -22,6 +37,7 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
+
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
             <button class="btn btn-primary" @click="component('settings')">Settings</button>
@@ -432,9 +448,7 @@ function population(aryOfJobs) {
 
 //getDistance(localStorage.getItem(app.lat), localStorage.getItem(app.lng), app.currentJobs.locations[0].lat, app.currentJobs.locations.data[0].lng)
 
-setTimeout(function() {
-    console.log(app.currentEvents);
-}, 10000)
+
 
 function populateEvents(aryOfEvents) {
     var eventCards = ""
@@ -452,7 +466,9 @@ function populateEvents(aryOfEvents) {
             </section>
         `
     }
-    console.log(aryOfEvents)
-    console.log(eventCards);
+  
     return eventCards;
 }
+
+
+
