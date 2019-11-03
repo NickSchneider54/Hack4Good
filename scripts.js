@@ -16,7 +16,10 @@ var landingPage = {
 var jobsPage = {
     template: 
     `
-        <h2>Jobs Near You</h2>   
+        <section id="jobsPage">
+            <h2>Jobs Near You</h2>
+            <button @click="component('settings')" class="btn btn-primary">Settings</button>  
+        </section>
     `,
     props:['component']
 }
@@ -128,19 +131,19 @@ var settings = {
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch1">Walking Distance</label>  
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">                                                         
+                    <input type="checkbox" class="custom-control-input" id="customSwitch1" name="walk" onclick="addConstraint(this)">                                                         
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch2">Biking Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch2">                    
+                    <input type="checkbox" class="custom-control-input" id="customSwitch2" name="biking" onclick="addConstraint(this)">                    
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch3">Busing Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch3">                    
+                    <input type="checkbox" class="custom-control-input" id="customSwitch3 name="busing" onclick="addConstraint(this)">                    
                 </div>
                 <div class="custom-control custom-switch">
                     <label class="custom-control-label" for="customSwitch4">Driving Distance</label>
-                    <input type="checkbox" class="custom-control-input" id="customSwitch4">                    
+                    <input type="checkbox" class="custom-control-input" id="customSwitch4" name="driving" onclick="addConstraint(this)">                    
                 </div>
             </div>
             <input @click="component('locationPage')" class="btn" type="button" value="location">
@@ -284,17 +287,15 @@ var app = new Vue({
             }   
             else{
                 this.setLocation(`${frm.address.value} ${frm.city.value} ${frm.zip.value}`);
-                this.component('jobsPage');
+                
                                 
             }          
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
-            console.log(this.location);
-
-       }       
-
-       },
+            console.log(this.location);      
+       }
+    },
        population: function(aryOfJobs) {
         var jobCards = ""
         for (var i = 0; i < 10; i++) {
@@ -394,7 +395,17 @@ function convertLatLng(lat, lng){
         }
         
     });  
-    app.component('jobsPage');          
+    app.component('jobsPage');        
+}
+
+function addConstraint(constraint){
+    var aryConstraints = [];
+    aryConstraints.push(constraint.name.value);
+    console.log(aryConstraints);
+}
+
+function filterJobPosts(aryConstraints){
+
 }
 
 
