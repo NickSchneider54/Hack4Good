@@ -1,0 +1,22 @@
+function population(aryOfJobs) {
+    var jobCards = "";
+    var travelStuff = [];
+    for (var i = 0; i < 10; i++) {
+        var travelStuff = getDistance(aryOfJobs[i].locations.data[0].lat, aryOfJobs[i].locations.data[0].lng);
+        jobCards +=
+         `
+            <section id="jobsPage">
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">${aryOfJobs[i].title} </div>
+                    <div class="card-body text-dark">
+                    <p class="card-text">${aryOfJobs[i].employer.name}</p>
+                    </div>
+                    <div class="card-footer"> 
+                        <h4>Walking<h4>
+                        <p>${travelStuff[0]} ${travelStuff[1]}</p>
+                </div>
+            </section>
+        `
+    }
+    return jobCards;
+}
