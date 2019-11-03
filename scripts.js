@@ -447,7 +447,7 @@ function population(aryOfJobs) {
         jobCards +=
          `
             <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card border-dark mb-3" style="max-width: 25rem;">
                     <div class="card-header"><h6 class="define-4">Title: </h6>${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
                     <p class="card-text"><h6 class="define-4">Company: </h6>${aryOfJobs[i].employer.name}</p>
