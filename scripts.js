@@ -29,6 +29,17 @@ $.ajax(settings).done(function (response) {
         }
 });
 
+//document.getElementById('landing-btn').style.display = "none";
+
+
+// var startUp = setInterval(function() {
+//     if (temp.length > 0) {
+//         clearInterval(startUp);
+//         document.getElementById('loadingSpinner').style.display = "none";
+//         app.currentComponent = 'landingPage';
+//     }
+// }, 1000); 
+
 var job = function(title, company, description, lat, lng, distance, duration){
     this.title = title;
     this.company = company;
@@ -455,6 +466,7 @@ function population(aryOfJobs) {
          `
             <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div><a href="https://maps.google.com/?q=${aryOfJobs[i].locations.data[0].lat},${aryOfJobs[i].locations.data[0].lat}" target="_blank">Open Map</a></div>
                     <div class="card-header">${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
                         <p class="card-text">${aryOfJobs[i].employer.name}</p>
@@ -488,6 +500,7 @@ function populateEvents(aryOfEvents) {
         `
             <section id="eventsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
+                
                     <div class="card-header">${aryOfEvents[i].title}</div>
                     <div class="card-body text-dark">
                         <p class="card-text">${aryOfEvents[i].description}</p>
