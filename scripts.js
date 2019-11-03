@@ -1,4 +1,6 @@
-
+setTimeout(function() {    
+    document.getElementById('listOfShit').innerHTML = population(app.currentJobs);
+}, 10000)
 
 var landingPage = {
     template:
@@ -18,19 +20,9 @@ var jobsPage = {
     `
         <section id="jobsPage">
             <h2>Jobs Near You</h2>
-<<<<<<< Updated upstream
-        
-            ${
-            setTimeout(function() {
-                population(app.currentJobs)
-            }, 10000)
-        }
-            
-            
+            <div id="listOfShit">
 
-=======
-            <button @click="component('settings')" class="btn btn-primary">Settings</button>  
->>>>>>> Stashed changes
+            </div>   
         </section>
     `,
     props:['component']
@@ -306,33 +298,10 @@ var app = new Vue({
        },
        setLocation: function(frmLocation){
             this.location = frmLocation;
-<<<<<<< Updated upstream
-            console.log(this.location);
-
-       } 
-=======
             console.log(this.location);      
        }
     },
-       population: function(aryOfJobs) {
-        var jobCards = ""
-        for (var i = 0; i < 10; i++) {
-            jobCards += `
-                <section id="jobsPage">
-                    <div class="card border-dark mb-3" style="max-width: 20rem;">
-                        <div class="card-header">${ [i] } </div>
-                        <div class="card-body text-dark">
-                        <p class="card-text">${ [i]}</p>
-                            getDistance(.lat, this.lat, currentjob.locations)</p>
-                        </div>
-                    </div>
-                </section>
-            `
-        }
-        console.log(aryOfJobs)
-        return jobCards;
->>>>>>> Stashed changes
-    },
+       
     mounted(){
         var newLocation;
         var newLat;
@@ -430,35 +399,32 @@ function filterJobPosts(aryConstraints, currentJobs){
             aryFiltered.push(app.currentJobs);
             for(var j = 0; j < 4; j++){
 
-<<<<<<< Updated upstream
+            }
+        }
+    }    
+    return jobCards;  
+    
+}
+
 function population(aryOfJobs) {
     var jobCards = ""
     for (var i = 0; i < 10; i++) {
-        jobCards += `
+        jobCards +=
+         `
+            <section id="jobsPage">
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
-                    <div class="card-header">${ aryOfJobs[i].title } </div>
+                    <div class="card-header">${i} </div>
                     <div class="card-body text-dark">
-                    <p class="card-text">${ aryOfJobs[i].employer.name }</p>
-                        </p>
+                    <p class="card-text">${i}</p>
+                        getDistance(.lat, this.lat, currentjob.locations)</p>
                     </div>
                 </div>
+            </section>
         `
-      
     }
-    
+    console.log(aryOfJobs)
+    console.log(jobCards);
     return jobCards;
-    
-    
 }
 
 
-setTimeout(function() {
-    console.log(population(app.currentJobs))
-}, 10000)
-=======
-            }
-        }
-    }
-}
-
->>>>>>> Stashed changes
