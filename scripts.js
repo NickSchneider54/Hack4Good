@@ -406,13 +406,16 @@ function getDistance(destinationsLat, destinationsLong){
             console.log(response);
             var distance = response.rows[0].elements[0].distance.text;
             var duration = response.rows[0].elements[0].duration.text;
-            var distanceFromOrigin = [distance, duration];
-            console.log(distanceFromOrigin)
-            return distanceFromOrigin;
+            distanceFromOrigin = [distance, duration];
+            passCoords(distanceFromOrigin);          
         }
     });
 }
 
+function passCoords(distanceFromOrigin){
+    aryDistAndDur = distanceFromOrigin;
+    console.log(aryDistAndDur);
+}
 
 function getLocation(){         
     navigator.geolocation.getCurrentPosition(locationFound);
@@ -447,10 +450,10 @@ function population(aryOfJobs) {
         jobCards +=
          `
             <section id="jobsPage">
-                <div class="card border-dark mb-3" style="max-width: 25rem;">
-                    <div class="card-header"><h6 class="define-4">Title: </h6>${aryOfJobs[i].title} </div>
+                <div class="card border-dark mb-3" style="max-width: 20rem;">
+                    <div class="card-header">${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
-                    <p class="card-text"><h6 class="define-4">Company: </h6>${aryOfJobs[i].employer.name}</p>
+                    <p class="card-text">${aryOfJobs[i].employer.name}</p>
                     </div>
                 </div>
             </section>
