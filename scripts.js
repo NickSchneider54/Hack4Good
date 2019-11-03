@@ -236,7 +236,6 @@ var app = new Vue({
         currentEvents: [],
         trvlConstraints: [],
         currentComponent: 'landingPage',
-        currentEvents: []
         },
     components:{
         'landingPage' : landingPage,
