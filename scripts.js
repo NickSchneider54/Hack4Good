@@ -454,7 +454,13 @@ function population(aryOfJobs) {
                 <div class="card border-dark mb-3" style="max-width: 20rem;">
                     <div class="card-header">${aryOfJobs[i].title} </div>
                     <div class="card-body text-dark">
-                    <p class="card-text">${aryOfJobs[i].employer.name}</p>
+                        <p class="card-text">${aryOfJobs[i].employer.name}</p>
+                    </div>
+                    <div class="card-footer>
+                        <div class="row">
+                            <div class="col-sm-6">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -463,7 +469,7 @@ function population(aryOfJobs) {
     return jobCards;
 }
 
-//getDistance(localStorage.getItem(app.lat), localStorage.getItem(app.lng), app.currentJobs.locations[0].lat, app.currentJobs.locations.data[0].lng)
+
 
 
 
