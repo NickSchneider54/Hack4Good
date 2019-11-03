@@ -21,7 +21,7 @@
 }
 
 #splashContrast{
-    background-color: rgba(117, 192, 235, .4);
+    background-color: rgba(117, 192, 235, .3);
     margin-top: 10vh;
     min-height: 40vh;
 }
@@ -39,6 +39,27 @@
     border: none !important;
     font-weight: 400;
     font-size: 1.2em;
+}
+
+#locationPage{
+    background-color: rgba(117, 192, 235, .08);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+#locationHeader{
+    text-align: center;
+}
+
+#currentLocation{
+    display: block;
+    margin: auto !important;
+}
+
+#addressForm{
+    width: 90%;
+    margin: auto !important;
+    display: block;
 }
 
 #currentLocation, #useAddress {

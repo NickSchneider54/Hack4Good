@@ -12,7 +12,8 @@ var settings = {
 }
 
 $.ajax(settings).done(function (response) {
-    var temp = response.data;
+    app.currentJobs = response.data;
+    temp = response.data;
     console.log(temp[0].locations.data[0].lat);
     var aryJobListings = []
     var jobLocation = [];
@@ -26,6 +27,9 @@ $.ajax(settings).done(function (response) {
     }
 });
 
+
+
+
 var job = function(title, company, description, lat, lng, distance, duration){
     this.title = title;
     this.company = company;
@@ -36,7 +40,6 @@ var job = function(title, company, description, lat, lng, distance, duration){
     this.duration = duration;
 }
 
-setTimeout(20000);
 
 var landingPage = {
     template:
@@ -70,12 +73,18 @@ var locationPage = {
     template:
     `
         <section id="locationPage">
-            <div id="loacationHeader">Set Location</div>
-            <div id="currentLocation"><button onclick="getLocation()" class="btn btn-primary">Use Current Location</button></div>
-            <div id="divider"><i class="line"></i><span id="or">OR</span><i class="line"></i></div>
-            <div id="locationForm">
-                
-                <form action="component(jobsPage)">
+            <div id="locationHeader">
+                <h5>Set Location</h5>
+            </div>
+            <div id="currentLocation">
+                <button onclick="getLocation()" class="btn btn-primary">Use Current Location</button>
+            </div>
+            <div id="divider">
+                <i class="line"></i><span id="or">OR</span><i class="line"></i>
+            </div>
+            
+            <div id="locationForm">                
+                <form action="component(jobsPage)" id="addressForm">
                     <div id="alertAddress" class="alertMsg"></div>
                     Street Address<br>
                     <input type="text" id="address" name="address">
@@ -88,7 +97,6 @@ var locationPage = {
                     <button onclick="return app.formValidation(this.form)" class="btn btn-primary btn-block" name="submit" type="button" id="useAddress">Use This Address</button>
                 </form>
             </div>
-            <div class="bottomBanner"></div>
         </section>    
     `,
     props:['component']
@@ -361,10 +369,8 @@ var app = new Vue({
 });
 
 function getDistance(destinationsLat, destinationsLong){
-      
-     //Find the distance
      var distanceService = new google.maps.DistanceMatrixService();
-     distanceService.getDistanceMatrix({
+     var distanceFromStartToFinish = distanceService.getDistanceMatrix({
         origins: [{lat: parseFloat(localStorage.getItem('lat')), lng: parseFloat(localStorage.getItem('lng'))}],
         destinations: [{lat: parseFloat(destinationsLat), lng: parseFloat(destinationsLong)}],
         travelMode: google.maps.TravelMode.WALKING,
@@ -415,8 +421,10 @@ function convertLatLng(lat, lng){
 }
 
 function population(aryOfJobs) {
-    var jobCards = ""
+    var jobCards = "";
+    var travelStuff = [];
     for (var i = 0; i < 10; i++) {
+        var travelStuff = getDistance(aryOfJobs[i].locations.data[0].lat, aryOfJobs[i].locations.data[0].lng);
         jobCards +=
          `
             <section id="jobsPage">
@@ -425,6 +433,9 @@ function population(aryOfJobs) {
                     <div class="card-body text-dark">
                     <p class="card-text">${aryOfJobs[i].employer.name}</p>
                     </div>
+                    <div class="card-footer"> 
+                        <h4>Walking<h4>
+                        <p>${travelStuff[0]} ${travelStuff[1]}</p>
                 </div>
             </section>
         `
